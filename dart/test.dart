@@ -1,5 +1,12 @@
 import 'dart:io';
 
+class Point{
+  int ?x;
+  int ?y;
+
+  Point(this.x, this.y);
+}
+
 class Geek1 {
   final String firstName;
   const Geek1(this.firstName);
