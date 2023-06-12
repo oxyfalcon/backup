@@ -34,6 +34,10 @@ var func = (item) {
 // list.map(func).forEach((item){print("$item, ${item.length}")});
 
 void main(List<String> arguments) {
+  Geek1 obj1 = Geek2("Akash");
+  obj1.test();
+
+  Todo t;
   int doSomething() => 2;
   int y = 2;
   int x = y;
@@ -55,10 +59,10 @@ void main(List<String> arguments) {
     print("$item, ${item.length}");
   });
 
-  Geek1 obj1 = Geek2("Akash");
-  obj1.test();
+  Geek1 obj2 = Geek2("Akash");
+  obj2.test();
   geekFunc();
-  Todo t;
+  Todo t1;
   dynamic a = new Employee();
   Object b = new Employee();
 //print(a.str11);
@@ -71,11 +75,23 @@ void main(List<String> arguments) {
   final Circle circle = Circle(5.0);
   print(Circle.pi);
   print('Area: ${circle.calculateArea()}');
-}
+  final Circle circles = Circle(5.0);
+  print(Circle.pi);
+  print('Area: ${circles.calculateArea()}');
 
-void main() {
-  Geek1 obj1 = Geek2("Akash");
-  obj1.test();
+  description = "Hello";
+  print(description);
+  description = 10;
+  print(description);
+
+  dynamic a2 = new Employee();
+  Object b2 = new Employee();
+  //print(a.str11);
+  a2.printEmp(); // No error
+  //b.printEmp(); // Compile error
+
+  Object a3 = "Document";
+  dynamic b4 = "b1b1";
 }
 
 class Implement {
@@ -90,10 +106,6 @@ void geekFunc() {
   print('Implement me');
 }
 
-void main() {
-  geekFunc();
-}
-
 class Todo {
   final String who;
   final String what;
@@ -106,24 +118,9 @@ void doSomething() {
   print('Do something');
 }
 
-void main() {
-  Todo t;
-}
-
 class Employee {
   printEmp() => print("Employee Object");
   // String get str11 = "hello";
-}
-
-void main() {
-  dynamic a = new Employee();
-  Object b = new Employee();
-  //print(a.str11);
-  a.printEmp(); // No error
-  //b.printEmp(); // Compile error
-
-  Object a1 = "Document";
-  dynamic b1 = "b1b1";
 }
 
 class Circle {
@@ -137,16 +134,6 @@ class Circle {
   }
 }
 
-void main() {
-  final Circle circle = Circle(5.0);
-  print(Circle.pi);
-  print('Area: ${circle.calculateArea()}');
-}
-
-bool isNoble(int atomicNumber) {
-  return _nobleGases[atomicNumber] != null;
-}
-
 int x() {
   var ss = 10;
   var aa = 12;
@@ -155,15 +142,6 @@ int x() {
 }
 
 late Object description;
-
-void main() {
-  description = "Hello";
-  print(description);
-  description = 10;
-  print(description);
-  var funcVar = x();
-  funcVar.y();
-}
 
 const double xOrigin = 0;
 const double yOrigin = 0;

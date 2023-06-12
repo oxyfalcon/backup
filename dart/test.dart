@@ -1,8 +1,8 @@
 import 'dart:io';
 
-class Point{
-  int ?x;
-  int ?y;
+class Point {
+  int? x;
+  int? y;
 
   Point(this.x, this.y);
 }
@@ -80,8 +80,7 @@ void main() {
   var record3 = testfunc(record);
 
   ({String name, int number}) record2;
-  record2 = (name: "AKash Singh \u2665", number: 10);3
-  
+  record2 = (name: "AKash Singh \u2665", number: 10);
 
   print(record3.$2);
   print(record2.name);
