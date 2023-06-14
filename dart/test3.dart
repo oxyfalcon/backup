@@ -1,13 +1,13 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:js_util';
-
 class Fraction {
   final int _x;
   final int _y;
 
   const Fraction.constConstruct(this._x, this._y);
   const Fraction(this._x) : this._y = _x * 3;
+  void printFraction() {
+    _y;
+    print("$this._x $this._y");
+  }
 }
 
 class Sample {
@@ -15,6 +15,7 @@ class Sample {
   static const y = 10;
   void fun() {
     const int xy = 20;
+    xy;
   }
 
   const Sample();
@@ -42,10 +43,10 @@ class Singleton {
   int? _y;
 
   static Singleton _obj = Singleton._default();
-  Singleton._internal(this._x, this._y);
   Singleton._default();
 
   int? get y => _y;
+  int? get x => _x;
 
   factory Singleton(int x, int y) {
     _obj._x = x;
@@ -61,7 +62,7 @@ class sample2 {
   }
 }
 
-class ParameterException implements Exception {}
+// class ParameterException extends Exception {}
 
 class Fraction2 {
   final int? _numerator;
@@ -92,12 +93,6 @@ class Fraction2 {
 // Although it has 2 different constructors, we utilizing the
 // const constructors for the annotations
 @Fraction2.constConstruct(numerator: 10, denominator: 30)
-abstract class Fraction3 implements Fraction2 {
-  final int? _numerator = 10;
-  final int? _denominator = 20;
-  final double? fraction = 10;
-}
-
 class Example {
   final int? a;
 
@@ -108,45 +103,35 @@ class Example {
 }
 
 void main() {
-  Fraction2 fll;
   // try{
   //   fll = Fraction2();
   // }
-  const int x = 10;
   Singleton s1 = Singleton(10, 20);
   Singleton s2 = Singleton(10, 30);
   print(s1.y);
+  print(s2.y);
+  (s1 == s2) ? print("Singleton: yes") : print("Singleton: no");
 
   Fraction x1 = Fraction.constConstruct(10, 20);
   print(x1._x);
-  Fraction f = Fraction.constConstruct(10, 20);
-  Fraction f1 = Fraction.constConstruct(10, 20);
+  Fraction f = const Fraction.constConstruct(10, 20);
+  Fraction f1 = const Fraction.constConstruct(10, 20);
 
   (f == f1) ? print("yes: f1") : print("No: f1");
 
-  Fraction f2 = Fraction.constConstruct(10, 20);
-
   try {
     Fraction2 f3 = Fraction2();
-  } on NullRejectionException {
-    print(null);
+    f3;
   } catch (e) {
     print(e);
   }
 
-  Fraction f5 = const Fraction(10);
-  (f == f1) ? print("yes") : print("no");
-  (f == f2) ? print("yes") : print("no");
-
-  var logger = Logger('UI');
   var logger3 = Logger("name2");
   var checklogger3 = Logger("name2");
 
   print(Logger._cache);
-  (logger3 == checklogger3) ? print("yes") : print("no");
+  (logger3 == checklogger3) ? print("yes: logger") : print("no: logger");
 
-  Example exp =
-      Example._(10); //only works with the current file, Not outside it
   final diameters = <double, String>{1.0: 'Earth'};
   final otherDiameters = <double, String>{0.383: 'Mercury', 0.949: 'Venus'};
 
