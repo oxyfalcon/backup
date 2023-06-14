@@ -1,28 +1,164 @@
-class Fraction{
-  late final dynamic x;
-  late final dynamic y;
-  
-  Fraction.constConstruct(int x1, int x2){
-    x = x1;
-    y = x2;
-    
+import 'dart:ffi';
+import 'dart:io';
+import 'dart:js_util';
+
+class Fraction {
+  final int _x;
+  final int _y;
+
+  const Fraction.constConstruct(this._x, this._y);
+  const Fraction(this._x) : this._y = _x * 3;
+}
+
+class Sample {
+  static const x = 10;
+  static const y = 10;
+  void fun() {
+    const int xy = 20;
+  }
+
+  const Sample();
+}
+
+class Logger {
+  final String name;
+  bool mute = false;
+  int counter;
+
+  static final Map<String, Logger> _cache = <String, Logger>{};
+
+  factory Logger(String name) {
+    return _cache.putIfAbsent(name, () => Logger._internal(name));
+  }
+  Logger._internal(this.name) : this.counter = name.length;
+
+  void log(String msg) {
+    if (!mute) print(msg);
   }
 }
 
-class Fraction2{
-  final int ?_numerator;
-  final int ?_denominator;
-  
-  const Fraction2({int ?numerator, int ?denominator}) : _numerator = numerator, _denominator = denominator;
+class Singleton {
+  int? _x;
+  int? _y;
+
+  static Singleton _obj = Singleton._default();
+  Singleton._internal(this._x, this._y);
+  Singleton._default();
+
+  int? get y => _y;
+
+  factory Singleton(int x, int y) {
+    _obj._x = x;
+    _obj._y = y;
+    return _obj;
+  }
 }
 
-void main(){
-//   const Fraction f = Fraction.constConstruct(10, 20);
-//   const Fraction f1 = Fraction.constConstruct(10, 20);
+class sample2 {
+  static sample2 obj = sample2();
+  factory sample2() {
+    return obj;
+  }
+}
+
+class ParameterException implements Exception {}
+
+class Fraction2 {
+  final int? _numerator;
+  final int? _denominator;
+  final double? fraction;
+
+  const Fraction2.constConstruct(
+      {required int numerator, required int denominator})
+      : _numerator = numerator,
+        _denominator = denominator,
+        fraction = numerator / denominator;
+
+  Fraction2({int? numerator, int? denominator})
+      : _numerator = numerator,
+        _denominator = denominator,
+        fraction = (denominator != null && numerator != null)
+            ? numerator / denominator
+            : throw FormatException("Undefined parameters");
+
+  void checkFraction() {
+    ((_denominator == 0 && _numerator == 0) || (_denominator == 0))
+        ? throw FormatException('Undefined Fraction Number')
+        : print("Fraction Successfull!!");
+  }
+}
+
+// Made from the constant constructor of Fraction2 class.
+// Although it has 2 different constructors, we utilizing the
+// const constructors for the annotations
+@Fraction2.constConstruct(numerator: 10, denominator: 30)
+abstract class Fraction3 implements Fraction2 {
+  final int? _numerator = 10;
+  final int? _denominator = 20;
+  final double? fraction = 10;
+}
+
+class Example {
+  final int? a;
+
+  Example._(this.a);
+  factory Example(int val) {
+    return Example._(val);
+  }
+}
+
+void main() {
+  Fraction2 fll;
+  // try{
+  //   fll = Fraction2();
+  // }
+  const int x = 10;
+  Singleton s1 = Singleton(10, 20);
+  Singleton s2 = Singleton(10, 30);
+  print(s1.y);
+
+  Fraction x1 = Fraction.constConstruct(10, 20);
+  print(x1._x);
+  Fraction f = Fraction.constConstruct(10, 20);
+  Fraction f1 = Fraction.constConstruct(10, 20);
+
+  (f == f1) ? print("yes: f1") : print("No: f1");
+
   Fraction f2 = Fraction.constConstruct(10, 20);
-//   (f == f1) ? print("yes") : print("no");
-//   (f == f2) ? print("yes") : print("no");
-  print(f2.x);
-  
-  
+
+  try {
+    Fraction2 f3 = Fraction2();
+  } on NullRejectionException {
+    print(null);
+  } catch (e) {
+    print(e);
+  }
+
+  Fraction f5 = const Fraction(10);
+  (f == f1) ? print("yes") : print("no");
+  (f == f2) ? print("yes") : print("no");
+
+  var logger = Logger('UI');
+  var logger3 = Logger("name2");
+  var checklogger3 = Logger("name2");
+
+  print(Logger._cache);
+  (logger3 == checklogger3) ? print("yes") : print("no");
+
+  Example exp =
+      Example._(10); //only works with the current file, Not outside it
+  final diameters = <double, String>{1.0: 'Earth'};
+  final otherDiameters = <double, String>{0.383: 'Mercury', 0.949: 'Venus'};
+
+  for (final item in otherDiameters.entries) {
+    diameters.putIfAbsent(item.key, () => item.value);
+  }
+  print(diameters);
+
+  // If the key already exists, the current value is returned.
+  // If the key doesn't exist, the value is then added.
+  // In this case, it is the value that is returned, "Jupiter"
+  final result = diameters.putIfAbsent(0.384, () => "Jupiter");
+  print(result); // Mercury
+  print(diameters); // {1.0: Earth, 0.383: Mercury, 0.949: Venus}
 }
