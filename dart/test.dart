@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Point {
   int? x;
   int? y;

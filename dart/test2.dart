@@ -8,10 +8,11 @@ class Point {
 }
 
 class ImmutablePoint extends Object {
-  final int? x;
-  final int? y;
+  const ImmutablePoint(this.x, this.y) : super();
+  final int x;
+  final int y;
 
-  const ImmutablePoint(int x, int y)
+  const ImmutablePoint.construct2(int x, int y)
       : this.x = x,
         this.y = y;
 }
@@ -51,6 +52,7 @@ void main() {
   String name = "image/png, video/mp4, image/jpeg, application/avi";
 //   print(fun(name));
   Example exp = Example(10);
+  exp.runtimeType;
   TestClass test = TestClass(name);
   print(test.x);
 
@@ -58,14 +60,22 @@ void main() {
     "point": [ImmutablePoint(10, 12)],
     "line": [ImmutablePoint(100, 150), ImmutablePoint(200, 500)]
   };
+
+  const Map<String, Object> l1 = {
+    "point": ImmutablePoint(10, 12),
+    "line": [ImmutablePoint(100, 150), ImmutablePoint(200, 500)]
+  };
+
+  print("l1 type: ${l1.runtimeType}");
+
   print(l["point"].runtimeType);
   print(l["line"].runtimeType);
   print(l.runtimeType);
-  const l2 = <String, dynamic>{
+  Map<String, List<ImmutablePoint>> l2 = <String, List<ImmutablePoint>>{
     "point": [ImmutablePoint(10, 12)],
     "line": [ImmutablePoint(100, 150), ImmutablePoint(200, 500)]
   };
 
-  print(l["point"]?[0].x);
-  print(l2["line"]?[0]?.x);
+  print(l["point"]![0].x);
+  print(l2["line"]![0].x);
 }
