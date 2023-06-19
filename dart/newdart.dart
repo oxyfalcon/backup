@@ -1,23 +1,28 @@
 import 'dart:math';
 
 base class A {
+  int y;
   int x;
 
-  A(this.x) {
+  A(this.x, this.y) {
     print("contructor called from A");
   }
   void method1() {
-    print("hello");
+    print("method1:");
   }
 
   void method2() {
     print("object");
   }
+
+  void method3() {
+    print("Object5");
+  }
 }
 
 base class B extends A {
   int x;
-  B(this.x) : super(x) {
+  B(this.x) : super(x, x) {
     print("constructor called from B");
   }
 
@@ -34,6 +39,31 @@ base class B extends A {
   @override
   void method1() {
     print("B: method1");
+  }
+}
+
+base class CC implements B {
+  int x;
+  int y;
+  CC(this.x, this.y) : super();
+
+  int call(int y) {
+    return y;
+  }
+
+  @override
+  void method2() {
+    print("CC: method2");
+  }
+
+  @override
+  void method1() {
+    print("CC: method1");
+  }
+
+  @override
+  void method3() {
+    print("CC: mehtod3");
   }
 }
 
