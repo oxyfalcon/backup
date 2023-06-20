@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 class tempClass {
   static const List<int> list = <int>[1, 2, 3, 4, 5, 6, 6, 11];
@@ -19,27 +18,28 @@ bool testOdd(int x) {
   return true;
 }
 
-Future<int> itr(int n) async {
+Stream<int> itr(int n) async* {
   if (n <= 0) {
-    return 1;
+    yield 1;
   }
-  return itr(n + 1);
+  yield* itr(n + 1);
 }
 
-// Iterable<int> auto(int n) sync* {
-//   if (n >= 0) {
-//     yield n;
-//     yield* auto(n - 1);
-//   }
-// }
+Iterable<int> auto(int n) sync* {
+  if (n >= 0) {
+    yield n;
+    yield* auto(n + 1);
+  }
+}
 
-// Future<int> f() async {
-//   return await Future(() => itr(10));
-// }
+Future<Iterable<int>> f() async {
+  return await Future(() => auto(10));
+}
 
 Future<List<int>> generateCode() {
   return Future.delayed(const Duration(seconds: 3), () {
-    List<int> ans = List<int>.from(tempClass.list.where(testEven));
+    List<int> ans =
+        List<int>.from(tempClass.list.where((int value) => value.isEven));
     return ans;
   });
 }
@@ -49,10 +49,19 @@ Future<List<int>> generateCode() {
 // }
 
 void main() async {
-  var result = itr(10);
-  result
-      .then((value) => print("done, $value"))
-      .catchError((err) => print("ERROR, $err"));
+  var ans = await f();
+  print(ans);
+
+  // try {
+  //   var result = await itr(10);
+  //   print(result);
+  // } catch (e) {
+  //   print(e);
+  // }
+  // var result = itr(10);
+  // result
+  //     .then((value) => print("done, $value"))
+  //     .catchError((err) => print("ERROR, $err"));
   print("");
 
   print("Even's existance: ${tempClass.list.any(testEven)}");

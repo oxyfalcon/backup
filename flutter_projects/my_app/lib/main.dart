@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                'This is the first app made by me',
+                'Application from My_App',
                 textAlign: TextAlign.center,
               ),
             ],

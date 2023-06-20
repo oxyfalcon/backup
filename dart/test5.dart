@@ -16,7 +16,7 @@ class B extends A with walking, talking {
   }
 }
 
-mixin class walking extends Object {
+mixin class walking {
   const walking();
   const factory walking.construct() = walking;
   void method() => print("from mixing walking");
