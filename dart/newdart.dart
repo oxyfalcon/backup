@@ -79,16 +79,26 @@ abstract class AA {
     print("Factory constructor called of AA");
     return BB();
   }
+
+  void method1() {
+    print("class AA: method1");
+  }
 }
 
 abstract mixin class M1 {
   int foo(int i) => i > 0 ? bar(i - 1) : 42;
   int bar(int i);
+  void method1() {
+    print("M1 mixin print");
+  }
 }
 
 abstract mixin class M2 {
   int foo(int i);
   int bar(int i) => i > 0 ? foo(i ~/ 2) : 24;
+  void method2() {
+    print("M2 mixin print");
+  }
 }
 
 class C = Object with M1, M2;
@@ -110,6 +120,10 @@ void main() {
   obj(10);
 
   AA objBB = AA.hello();
+  C objc = C();
+  objc.method1();
+  objc.method2();
+  objBB.method1();
 
   wannabeFunction(20);
   int funn = wannabeFunction(10);

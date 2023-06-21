@@ -1,5 +1,3 @@
-import 'test5.dart';
-
 class BaseClass {}
 
 class ExtendedBaseClass extends BaseClass {}

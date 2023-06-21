@@ -143,7 +143,7 @@ void main() {
   // If the key already exists, the current value is returned.
   // If the key doesn't exist, the value is then added.
   // In this case, it is the value that is returned, "Jupiter"
-  final result = diameters.putIfAbsent(0.384, () => "Jupiter");
+  final result = diameters.putIfAbsent(0.383, () => "Jupiter");
   print(result); // Mercury
   print(diameters); // {1.0: Earth, 0.383: Mercury, 0.949: Venus}
 }
