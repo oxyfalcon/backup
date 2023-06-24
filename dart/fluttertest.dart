@@ -42,9 +42,11 @@ class test extends b {
   }
 }
 
-void main() {
-  C f(int i) => C(i);
-}
+// void main() {
+//   C f(int i) {
+//     return const C(i);
+//   }
+// }
 // abstract class b extends a {
 //   b() : super();
 //   a build() {

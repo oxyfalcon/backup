@@ -17,15 +17,32 @@ class Testapp extends StatelessWidget {
         child: MaterialApp(
             title: "Application",
             theme: ThemeData(
-                useMaterial3: true,
-                colorScheme: ColorScheme.fromSeed(
-                    seedColor: const Color.fromRGBO(66, 108, 176, 1))),
+              useMaterial3: true,
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+            ),
             home: const MyHomePage2()));
   }
 }
 
 class Generator extends ChangeNotifier {
   var noun = WordGenerator().randomName();
+
+  void getNextName() {
+    noun = WordGenerator().randomName();
+    notifyListeners();
+  }
+
+  var l = <String>[];
+  IconData icon;
+  void getFavorites() {
+    if (!l.contains(noun)) {
+      l.add(noun);
+      icon = Icons.favorite_border_outlined;
+    } else {
+      icon = Icons.favorite;
+    }
+  }
 }
 
 class MyHomePage2 extends StatelessWidget {
@@ -34,10 +51,11 @@ class MyHomePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium;
+    final style = theme.textTheme.displayMedium?.copyWith();
+    final style2 = theme.textTheme.displaySmall;
 
     var appState = context.watch<Generator>();
-    var word = appState.noun;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -47,11 +65,8 @@ class MyHomePage2 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    appState.noun.toLowerCase(),
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  Text("Word Generator", style: style),
+                  Text("Word Generator", style: style2),
+                  Names(appState: appState, style: style),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -63,13 +78,44 @@ class MyHomePage2 extends StatelessWidget {
                           label: const Text("like"),
                         ),
                       ),
-                      ElevatedButton.icon(
-                          onPressed: () => Void,
-                          icon: const Icon(Icons.favorite_border_outlined),
-                          label: const Text("Next"))
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton.icon(
+                            onPressed: () => appState.getNextName(),
+                            icon: const Icon(Icons.favorite_border_outlined),
+                            label: const Text("Next")),
+                      )
                     ],
                   ),
                 ])),
+      ),
+    );
+  }
+}
+
+class Names extends StatelessWidget {
+  const Names({
+    super.key,
+    required this.appState,
+    required this.style,
+  });
+
+  final Generator appState;
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      surfaceTintColor: theme.primaryColorDark,
+      shadowColor: theme.cardColor,
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          appState.noun.toLowerCase(),
+          style: style,
+        ),
       ),
     );
   }
