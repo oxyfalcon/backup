@@ -34,8 +34,8 @@ class Generator extends ChangeNotifier {
   }
 
   var l = <String>[];
-  IconData icon;
   void getFavorites() {
+    IconData icon;
     if (!l.contains(noun)) {
       l.add(noun);
       icon = Icons.favorite_border_outlined;
