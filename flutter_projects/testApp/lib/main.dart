@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:word_generator/word_generator.dart';
@@ -12,46 +14,55 @@ class Testapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => Generator(),
-        child: MaterialApp(
-            title: "Application",
-            theme: ThemeData(
-              useMaterial3: true,
-              colorScheme:
-                  ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
-            ),
-            home: const MyHomePage2()));
+      create: (context) => Generator(),
+      child: MaterialApp(
+          title: "Application",
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+          ),
+          home: const MyHomePage2()),
+    );
   }
 }
 
-class Generator extends ChangeNotifier {
-  var noun = WordGenerator().randomName();
+// class Generator extends ChangeNotifier {
+//   var noun = WordGenerator().randomName();
 
-  void getNextName() {
-    noun = WordGenerator().randomName();
-    notifyListeners();
-  }
+//   void getNextName() {
+//     noun = WordGenerator().randomName();
+//     notifyListeners();
+//   }
 
-  static var l = <String>[];
+//   static var l = <String>[];
 
-  void getFavorites() {
-    if (l.contains(noun)) {
-      l.remove(noun);
-    } else {
-      l.add(noun);
-    }
-    notifyListeners();
-  }
+//   void getFavorites() {
+//     if (l.contains(noun)) {
+//       l.remove(noun);
+//     } else {
+//       l.add(noun);
+//     }
+//     notifyListeners();
+//   }
 
-  void removeFavourites(String str) {
-    if (l.contains(str)) {
-      l.remove(str);
-    } else {
-      throw UnimplementedError;
-    }
-    notifyListeners();
-  }
-}
+//   void removeFavourites(String str) {
+//     if (l.contains(str)) {
+//       l.remove(str);
+//     } else {
+//       throw UnimplementedError;
+//     }
+//     notifyListeners();
+//   }
+// }
+
+// class staticListName extends InheritedWidget{
+//   final String names;
+//   final List<String> l;
+
+//   const staticListName({required names})
+
+// }
 
 class MyHomePage2 extends StatefulWidget {
   const MyHomePage2({super.key});
@@ -61,7 +72,24 @@ class MyHomePage2 extends StatefulWidget {
 }
 
 class _MyHomePage2State extends State<MyHomePage2> {
-  var selectedIndex = 0;
+  int selectedIndex = 0;
+  String _names = "";
+  String get names => _names;
+  List<String> _nameList = <String>[];
+  List<String> get nameList => _nameList;
+
+  set nameList(List<String> l) {
+    setState(() {
+      _nameList = l;
+    });
+  }
+
+  set names(String n) {
+    setState(() {
+      _names = n;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -69,10 +97,11 @@ class _MyHomePage2State extends State<MyHomePage2> {
         theme.textTheme.displaySmall!.copyWith(color: theme.canvasColor);
     final style2 = theme.textTheme.displaySmall;
 
-    var appState = context.watch<Generator>();
+    // Widget appState;
+    // Consumer<Generator>(builder: (_, nou, __) => app);
 
     IconData icon;
-    if (Generator.l.contains(appState.noun)) {
+    if (nameList.isEmpty) {
       icon = Icons.favorite;
     } else {
       icon = Icons.favorite_border_outlined;
@@ -82,7 +111,12 @@ class _MyHomePage2State extends State<MyHomePage2> {
     switch (selectedIndex) {
       case 0:
         page = GeneratorWord(
-            style2: style2, appState: appState, style: style, icon: icon);
+          style2: style2,
+          style: style,
+          icon: icon,
+          nameList: nameList,
+          names: names,
+        );
       case 1:
         page = const FavoriteWidgetPage();
       default:
@@ -126,18 +160,19 @@ class _MyHomePage2State extends State<MyHomePage2> {
 }
 
 class GeneratorWord extends StatelessWidget {
-  const GeneratorWord({
-    super.key,
-    required this.style2,
-    required this.appState,
-    required this.style,
-    required this.icon,
-  });
+  const GeneratorWord(
+      {super.key,
+      required this.style2,
+      required this.style,
+      required this.icon,
+      required this.names,
+      required this.nameList});
 
   final TextStyle? style2;
-  final Generator appState;
   final TextStyle style;
   final IconData icon;
+  final String names;
+  final List<String> nameList;
 
   @override
   Widget build(BuildContext context) {
