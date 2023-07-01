@@ -240,14 +240,18 @@ class ButtonWidget extends StatefulWidget {
   final List<String> nameList;
 
   @override
-  State<ButtonWidget> createState() => _ButtonWidgetState();
+  State<ButtonWidget> createState() => ButtonWidgetState();
 }
 
-class _ButtonWidgetState extends State<ButtonWidget> {
-  IconData? icon1 = Icons.favorite_border_outlined;
-
+class ButtonWidgetState extends State<ButtonWidget> {
   @override
   Widget build(BuildContext context) {
+    IconData? icon1 = Icons.favorite_border_outlined;
+    if (myHomePageList.currentState!.nameList.contains(widget.names)) {
+      icon1 = Icons.favorite;
+    } else {
+      icon1 = Icons.favorite_border_outlined;
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -259,10 +263,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 if (myHomePageList.currentState!.nameList
                     .contains(widget.names)) {
                   myHomePageList.currentState!.nameList.remove(widget.names);
-                  icon1 = Icons.favorite_border_outlined;
                 } else {
                   myHomePageList.currentState!.nameList.add(widget.names);
-                  icon1 = Icons.favorite;
                 }
               });
             },
