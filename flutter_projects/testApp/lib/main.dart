@@ -1,6 +1,8 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:word_generator/word_generator.dart';
+
+final GlobalKey<MyHomePage2State> myHomePageList =
+    GlobalKey<MyHomePage2State>();
 
 void main() {
   runApp(const Testapp());
@@ -11,45 +13,13 @@ class Testapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => Generator(),
-        child: MaterialApp(
-            title: "Application",
-            theme: ThemeData(
-              useMaterial3: true,
-              colorScheme:
-                  ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
-            ),
-            home: const MyHomePage2()));
-  }
-}
-
-class Generator extends ChangeNotifier {
-  var noun = WordGenerator().randomName();
-
-  void getNextName() {
-    noun = WordGenerator().randomName();
-    notifyListeners();
-  }
-
-  static var l = <String>[];
-
-  void getFavorites() {
-    if (l.contains(noun)) {
-      l.remove(noun);
-    } else {
-      l.add(noun);
-    }
-    notifyListeners();
-  }
-
-  void removeFavourites(String str) {
-    if (l.contains(str)) {
-      l.remove(str);
-    } else {
-      throw UnimplementedError;
-    }
-    notifyListeners();
+    return MaterialApp(
+        title: "Application",
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+        ),
+        home: MyHomePage2(key: myHomePageList));
   }
 }
 
@@ -57,11 +27,28 @@ class MyHomePage2 extends StatefulWidget {
   const MyHomePage2({super.key});
 
   @override
-  State<MyHomePage2> createState() => _MyHomePage2State();
+  State<MyHomePage2> createState() => MyHomePage2State();
 }
 
-class _MyHomePage2State extends State<MyHomePage2> {
-  var selectedIndex = 0;
+class MyHomePage2State extends State<MyHomePage2> {
+  int selectedIndex = 0;
+  String _names = WordGenerator().randomName();
+  String get names => _names;
+  static final List<String> _nameList = [];
+  List<String> get nameList => _nameList;
+
+  void namesGenerator() {
+    setState(() {
+      _names = WordGenerator().randomName();
+    });
+  }
+
+  void removeName(String na) {
+    setState(() {
+      _nameList.remove(na);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -69,22 +56,19 @@ class _MyHomePage2State extends State<MyHomePage2> {
         theme.textTheme.displaySmall!.copyWith(color: theme.canvasColor);
     final style2 = theme.textTheme.displaySmall;
 
-    var appState = context.watch<Generator>();
-
-    IconData icon;
-    if (Generator.l.contains(appState.noun)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border_outlined;
-    }
-
     Widget page;
     switch (selectedIndex) {
       case 0:
         page = GeneratorWord(
-            style2: style2, appState: appState, style: style, icon: icon);
+          style2: style2,
+          style: style,
+          nameList: _nameList,
+          names: names,
+        );
       case 1:
-        page = const FavoriteWidgetPage();
+        page = FavoriteWidgetPage(
+            nameList: MyHomePage2State._nameList,
+            name: myHomePageList.currentState!.names);
       default:
         throw ("unimplemented Error");
     }
@@ -126,18 +110,17 @@ class _MyHomePage2State extends State<MyHomePage2> {
 }
 
 class GeneratorWord extends StatelessWidget {
-  const GeneratorWord({
-    super.key,
-    required this.style2,
-    required this.appState,
-    required this.style,
-    required this.icon,
-  });
+  const GeneratorWord(
+      {super.key,
+      required this.style2,
+      required this.style,
+      required this.names,
+      required this.nameList});
 
   final TextStyle? style2;
-  final Generator appState;
   final TextStyle style;
-  final IconData icon;
+  final String names;
+  final List<String> nameList;
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +135,8 @@ class GeneratorWord extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("Word Generator", style: style2),
-                  Names(appState: appState, style: style),
-                  ButtonWidget(appState: appState, icon: icon),
+                  Names(names: names, style: style),
+                  ButtonWidget(nameList: nameList, names: names),
                 ])),
       ),
     );
@@ -161,30 +144,36 @@ class GeneratorWord extends StatelessWidget {
 }
 
 class FavoriteWidgetPage extends StatelessWidget {
-  const FavoriteWidgetPage({super.key});
-
+  const FavoriteWidgetPage(
+      {super.key, required this.nameList, required this.name});
+  final List<String> nameList;
+  final String name;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    var appState = context.watch<Generator>();
 
-    if (Generator.l.isEmpty) {
+    if (nameList.isEmpty) {
       return NoFavorites(theme: theme);
     } else {
-      return NumberOfFavorites(theme: theme, appState: appState);
+      return NumberOfFavorites(
+        theme: theme,
+        nameList: nameList,
+        name: name,
+      );
     }
   }
 }
 
 class NumberOfFavorites extends StatelessWidget {
-  const NumberOfFavorites({
-    super.key,
-    required this.theme,
-    required this.appState,
-  });
+  const NumberOfFavorites(
+      {super.key,
+      required this.theme,
+      required this.nameList,
+      required this.name});
 
   final ThemeData theme;
-  final Generator appState;
+  final List<String> nameList;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -196,21 +185,20 @@ class NumberOfFavorites extends StatelessWidget {
             padding: const EdgeInsets.all(25.0),
             child: FittedBox(
               child: Text(
-                "You have ${Generator.l.length} favourites",
+                "You have ${nameList.length} favourites",
                 textDirection: TextDirection.ltr,
                 textAlign: TextAlign.start,
                 style: theme.textTheme.displaySmall,
               ),
             ),
           ),
-          for (String i in Generator.l)
+          for (String i in nameList)
             ListTile(
               title: Text(i),
               leading: IconButton(
-                icon: const Icon(Icons.delete_outlined),
-                color: Theme.of(context).colorScheme.primary,
-                onPressed: () => appState.removeFavourites(i),
-              ),
+                  icon: const Icon(Icons.delete_outlined),
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () => myHomePageList.currentState!.removeName(i)),
             )
         ],
       ),
@@ -241,15 +229,22 @@ class NoFavorites extends StatelessWidget {
   }
 }
 
-class ButtonWidget extends StatelessWidget {
+class ButtonWidget extends StatefulWidget {
   const ButtonWidget({
     super.key,
-    required this.appState,
-    required this.icon,
+    required this.names,
+    required this.nameList,
   });
 
-  final Generator appState;
-  final IconData icon;
+  final String names;
+  final List<String> nameList;
+
+  @override
+  State<ButtonWidget> createState() => _ButtonWidgetState();
+}
+
+class _ButtonWidgetState extends State<ButtonWidget> {
+  IconData? icon1 = Icons.favorite_border_outlined;
 
   @override
   Widget build(BuildContext context) {
@@ -259,15 +254,31 @@ class ButtonWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton.icon(
-            onPressed: () => appState.getFavorites(),
-            icon: Icon(icon),
-            label: const Text("like"),
+            onPressed: () {
+              setState(() {
+                if (myHomePageList.currentState!.nameList
+                    .contains(widget.names)) {
+                  myHomePageList.currentState!.nameList.remove(widget.names);
+                  icon1 = Icons.favorite_border_outlined;
+                } else {
+                  myHomePageList.currentState!.nameList.add(widget.names);
+                  icon1 = Icons.favorite;
+                }
+              });
+            },
+            icon: Icon(icon1),
+            label: const Text("Like"),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
-            onPressed: () => appState.getNextName(),
+            onPressed: () {
+              setState(() {
+                icon1 = Icons.favorite_border_outlined;
+              });
+              myHomePageList.currentState!.namesGenerator();
+            },
             child: const Text("Next"),
           ),
         )
@@ -277,14 +288,10 @@ class ButtonWidget extends StatelessWidget {
 }
 
 class Names extends StatelessWidget {
-  const Names({
-    super.key,
-    required this.appState,
-    required this.style,
-  });
+  const Names({super.key, required this.style, required this.names});
 
-  final Generator appState;
   final TextStyle? style;
+  final String names;
 
   @override
   Widget build(BuildContext context) {
@@ -297,7 +304,7 @@ class Names extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: FittedBox(
           child: Text(
-            appState.noun.toLowerCase(),
+            names,
             style: style,
             selectionColor: theme.cardColor,
           ),
