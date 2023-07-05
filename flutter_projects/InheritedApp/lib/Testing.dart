@@ -1,4 +1,3 @@
-import 'package:app/names.dart';
 import 'package:flutter/material.dart';
 import 'package:word_generator/word_generator.dart';
 
@@ -197,20 +196,17 @@ class _FavoriteListState extends State<FavoriteList> {
             ),
           ),
           for (String i in widget.currentStateList)
-            Card(
-              elevation: 2.5,
-              child: ListTile(
-                  key: UniqueKey(),
-                  title: Text(i),
-                  leading: IconButton(
-                      icon: const Icon(Icons.delete_outlined),
-                      color: Theme.of(context).colorScheme.primary,
-                      onPressed: () {
-                        setState(() {
-                          widget.currentState.removeName(i);
-                        });
-                      })),
-            )
+            ListTile(
+                key: UniqueKey(),
+                title: Text(i),
+                leading: IconButton(
+                    icon: const Icon(Icons.delete_outlined),
+                    color: Theme.of(context).colorScheme.primary,
+                    onPressed: () {
+                      setState(() {
+                        widget.currentState.removeName(i);
+                      });
+                    }))
         ],
       ),
     );
@@ -317,6 +313,33 @@ class ButtonWidgetState extends State<ButtonWidget> {
           ),
         )
       ],
+    );
+  }
+}
+
+class Names extends StatelessWidget {
+  const Names({super.key, required this.style});
+
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentStateName = InheritedHomePage.of(context).names;
+    final theme = Theme.of(context);
+    return Card(
+      surfaceTintColor: theme.primaryColorDark,
+      shadowColor: theme.cardColor,
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FittedBox(
+          child: Text(
+            currentStateName,
+            style: style,
+            selectionColor: theme.cardColor,
+          ),
+        ),
+      ),
     );
   }
 }

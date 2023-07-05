@@ -3,11 +3,15 @@ Future<int> divider() {
 }
 
 Future<List<int>> getList(List<int> list) async {
-  var number = divider()
+  Future<List<int>> number = divider()
       .then((number) => List<int>.from(
           list.where((element) => element % number == 0 ? true : false)))
-      .then((value) => print("From Future Class: $value"));
+      .then((value) {
+    print("object");
+    return value;
+  });
   print("From Future Class: $number");
+
   // var ans = List<int>.from(
   //     list.where((element) => element % number == 0 ? true : false));
   return number;

@@ -1,4 +1,3 @@
-import 'package:app/names.dart';
 import 'package:flutter/material.dart';
 import 'package:word_generator/word_generator.dart';
 
@@ -75,19 +74,13 @@ class MyHomePage2State extends State<MyHomePage2> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final style =
-        theme.textTheme.displaySmall!.copyWith(color: theme.canvasColor);
-    final style2 = theme.textTheme.displaySmall;
 
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorWord(
-          style2: style2,
-          style: style,
-        );
+        page = const GeneratorWord();
       case 1:
-        page = NumberOfFavorites(theme: theme);
+        page = const NumberOfFavorites();
       default:
         throw ("unimplemented Error");
     }
@@ -133,17 +126,14 @@ class MyHomePage2State extends State<MyHomePage2> {
 }
 
 class GeneratorWord extends StatelessWidget {
-  const GeneratorWord({
-    super.key,
-    required this.style2,
-    required this.style,
-  });
-
-  final TextStyle? style2;
-  final TextStyle style;
+  const GeneratorWord({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style =
+        theme.textTheme.displaySmall!.copyWith(color: theme.canvasColor);
+    final style2 = theme.textTheme.displaySmall;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: Padding(
@@ -164,15 +154,7 @@ class GeneratorWord extends StatelessWidget {
 }
 
 class FavoriteList extends StatefulWidget {
-  const FavoriteList(
-      {super.key,
-      required this.currentStateList,
-      required this.currentState,
-      required this.theme});
-
-  final List<String> currentStateList;
-  final ThemeData theme;
-  final MyHomePage2State currentState;
+  const FavoriteList({super.key});
 
   @override
   State<FavoriteList> createState() => _FavoriteListState();
@@ -181,36 +163,36 @@ class FavoriteList extends StatefulWidget {
 class _FavoriteListState extends State<FavoriteList> {
   @override
   Widget build(BuildContext context) {
+    final currentStateList = InheritedHomePage.of(context).nameList;
+    final currentState = InheritedHomePage.of(context);
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: widget.theme.colorScheme.primaryContainer,
+      backgroundColor: theme.colorScheme.primaryContainer,
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(25.0),
             child: FittedBox(
               child: Text(
-                "You have ${widget.currentStateList.length} favourites",
+                "You have ${currentStateList.length} favourites",
                 textDirection: TextDirection.ltr,
                 textAlign: TextAlign.start,
-                style: widget.theme.textTheme.displaySmall,
+                style: theme.textTheme.displaySmall,
               ),
             ),
           ),
-          for (String i in widget.currentStateList)
-            Card(
-              elevation: 2.5,
-              child: ListTile(
-                  key: UniqueKey(),
-                  title: Text(i),
-                  leading: IconButton(
-                      icon: const Icon(Icons.delete_outlined),
-                      color: Theme.of(context).colorScheme.primary,
-                      onPressed: () {
-                        setState(() {
-                          widget.currentState.removeName(i);
-                        });
-                      })),
-            )
+          for (String i in currentStateList)
+            ListTile(
+                key: UniqueKey(),
+                title: Text(i),
+                leading: IconButton(
+                    icon: const Icon(Icons.delete_outlined),
+                    color: Theme.of(context).colorScheme.primary,
+                    onPressed: () {
+                      setState(() {
+                        currentState.removeName(i);
+                      });
+                    }))
         ],
       ),
     );
@@ -218,8 +200,7 @@ class _FavoriteListState extends State<FavoriteList> {
 }
 
 class NumberOfFavorites extends StatefulWidget {
-  const NumberOfFavorites({super.key, required this.theme});
-  final ThemeData theme;
+  const NumberOfFavorites({super.key});
 
   @override
   State<NumberOfFavorites> createState() => _NumberOfFavoritesState();
@@ -229,30 +210,21 @@ class _NumberOfFavoritesState extends State<NumberOfFavorites> {
   @override
   Widget build(BuildContext context) {
     final currentStateList = InheritedHomePage.of(context).nameList;
-    final currentState = InheritedHomePage.of(context);
-    final theme = Theme.of(context);
 
     if (currentStateList.isEmpty) {
-      return NoFavorites(theme: theme);
+      return const NoFavorites();
     } else {
-      return FavoriteList(
-          currentStateList: currentStateList,
-          currentState: currentState,
-          theme: theme);
+      return const FavoriteList();
     }
   }
 }
 
 class NoFavorites extends StatelessWidget {
-  const NoFavorites({
-    super.key,
-    required this.theme,
-  });
-
-  final ThemeData theme;
+  const NoFavorites({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
         backgroundColor: theme.colorScheme.primaryContainer,
         body: Center(
@@ -317,6 +289,33 @@ class ButtonWidgetState extends State<ButtonWidget> {
           ),
         )
       ],
+    );
+  }
+}
+
+class Names extends StatelessWidget {
+  const Names({super.key, required this.style});
+
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final currentStateName = InheritedHomePage.of(context).names;
+    final theme = Theme.of(context);
+    return Card(
+      surfaceTintColor: theme.primaryColorDark,
+      shadowColor: theme.cardColor,
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FittedBox(
+          child: Text(
+            currentStateName,
+            style: style,
+            selectionColor: theme.cardColor,
+          ),
+        ),
+      ),
     );
   }
 }

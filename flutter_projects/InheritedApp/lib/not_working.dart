@@ -62,14 +62,12 @@ class MyHomePage2State extends State<MyHomePage2> {
   void namesGenerator() {
     setState(() {
       _names = WordGenerator().randomName();
-      debugPrint("namesGenerator: $mounted");
     });
   }
 
   void removeName(String na) {
     setState(() {
       _nameList.remove(na);
-      print("removeName: $mounted");
     });
   }
 
@@ -88,8 +86,7 @@ class MyHomePage2State extends State<MyHomePage2> {
           style: style,
         );
       case 1:
-        page = InheritedFavoriteWidgetPage(
-            f: FavoriteWidgetPageState(), c: const FavoriteWidgetPage());
+        page = const FavoriteWidgetPage();
       default:
         throw ("unimplemented Error");
     }
@@ -134,16 +131,6 @@ class MyHomePage2State extends State<MyHomePage2> {
   }
 }
 
-class WrapperClass extends StatelessWidget {
-  const WrapperClass({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return InheritedFavoriteWidgetPage(
-        f: FavoriteWidgetPageState(), c: FavoriteWidgetPage(key: UniqueKey()));
-  }
-}
-
 class GeneratorWord extends StatelessWidget {
   const GeneratorWord({
     super.key,
@@ -175,53 +162,32 @@ class GeneratorWord extends StatelessWidget {
   }
 }
 
-class InheritedFavoriteWidgetPage extends InheritedWidget {
-  final FavoriteWidgetPageState f;
-  final Widget c;
-  const InheritedFavoriteWidgetPage(
-      {Key? key, required this.f, required this.c})
-      : super(key: key, child: c);
-
-  @override
-  bool updateShouldNotify(InheritedFavoriteWidgetPage oldWidget) {
-    return key != oldWidget.key;
-  }
-
-  static FavoriteWidgetPageState of(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<InheritedFavoriteWidgetPage>()!
-      .f;
-}
-
 class FavoriteWidgetPage extends StatefulWidget {
   const FavoriteWidgetPage({super.key});
+  // final List<String> currentStateList;
+  // final ThemeData theme;
 
   @override
   State<FavoriteWidgetPage> createState() => FavoriteWidgetPageState();
 }
 
 class FavoriteWidgetPageState extends State<FavoriteWidgetPage> {
-  void updatePage() {
-    print(mounted);
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final currentStateList = InheritedHomePage.of(context).nameList;
 
     if (currentStateList.isEmpty) {
-      print("I am here 3");
       return NoFavorites(theme: theme);
     } else {
-      return NumberOfFavorites(theme: theme, g: updatePage);
+      return NumberOfFavorites(theme: theme);
     }
   }
 }
 
 class NumberOfFavorites extends StatefulWidget {
-  const NumberOfFavorites({super.key, required this.theme, required this.g});
+  const NumberOfFavorites({super.key, required this.theme});
   final ThemeData theme;
-  final Function g;
 
   @override
   State<NumberOfFavorites> createState() => _NumberOfFavoritesState();
@@ -258,11 +224,7 @@ class _NumberOfFavoritesState extends State<NumberOfFavorites> {
                     onPressed: () {
                       setState(() {
                         currentState.removeName(i);
-                        InheritedFavoriteWidgetPage.of(context).updatePage();
                       });
-                      if (currentStateList.isEmpty) {
-                        InheritedFavoriteWidgetPage.of(context).updatePage();
-                      }
                     }))
         ],
       ),
