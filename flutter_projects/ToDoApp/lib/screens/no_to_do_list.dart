@@ -14,7 +14,7 @@ class NoToDoList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: FittedBox(
-                  child: Text("No ToDo", style: theme.textTheme.labelLarge)),
+                  child: Text("No Todo", style: theme.textTheme.labelLarge)),
             ),
           ),
           const AddToDoButton()
