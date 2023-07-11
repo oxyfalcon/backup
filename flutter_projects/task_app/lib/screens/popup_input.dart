@@ -18,6 +18,8 @@ Future<dynamic> dialog(
   TextEditingController description = TextEditingController();
   title.text = todo.todo;
   description.text = todo.description;
+  String originalTitle = todo.todo;
+  String origianlDescrition = todo.description;
   Todo newTodo = todo;
 
   final todoState = ref.watch(todoProvider.notifier);
@@ -70,7 +72,8 @@ Future<dynamic> dialog(
                   onPressed: () {
                     title.clear();
                     description.clear();
-                    todoState.printList();
+                    todo.todo = originalTitle;
+                    todo.description = origianlDescrition;
                     Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.cancel),

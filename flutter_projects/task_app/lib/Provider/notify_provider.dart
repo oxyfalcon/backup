@@ -21,12 +21,6 @@ class TodoList extends Notifier<List<Todo>> {
     return [];
   }
 
-  void printList() {
-    for (var itr in state) {
-      print("${itr.todo}, ${itr.description}, ${itr.id} \n");
-    }
-  }
-
   void addTodo(Todo t) {
     state = [...state, t];
   }
@@ -36,9 +30,6 @@ class TodoList extends Notifier<List<Todo>> {
   }
 
   void editTodo({required Todo original, required Todo edited}) {
-    // for (var i in state) {
-    //   print("${i.todo}, ${i.description}, ${i.id} \n");
-    // }
     state = List.from(state.where((element) {
       if (element.id == edited.id) {
         element = edited;
