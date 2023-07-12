@@ -43,7 +43,6 @@ class Tiles extends ConsumerStatefulWidget {
 class _TilesState extends ConsumerState<Tiles> {
   @override
   Widget build(BuildContext context) {
-    print("Tile Build");
     List<Todo> list = ref.watch(todoProvider);
     final todoState = ref.watch(todoProvider.notifier);
     return Column(children: <Widget>[
@@ -78,18 +77,8 @@ class _TilesState extends ConsumerState<Tiles> {
                     itr.completed = change;
                   });
                 }),
-            // trailing: Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     EditButton(itr: itr),
-            //     DeleteButton(todoState: todoState, itr: itr),
-            //   ],
-            // ),
           ),
         ),
     ]);
-    //    ],
-    //   );
   }
 }
