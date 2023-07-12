@@ -37,20 +37,6 @@ class TodoState extends State<Todo> {
     });
   }
 
-  // void editTiles(
-  //     {required MapEntry<String, String> original,
-  //     required MapEntry<String, String> edited}) {
-  //   Map<String, String> newMap = {};
-  //   newMap.forEach((key, value) {
-  //     map.containsKey(original.key)
-  //         ? newMap.addEntries([edited])
-  //         : newMap.addEntries([MapEntry<String, String>(key, value)]);
-  //   });
-  //   print(map);
-  //   print(newMap);
-  //   _map = newMap;
-  // }
-
   @override
   Widget build(BuildContext context) {
     print("TodoState widget");

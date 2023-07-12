@@ -9,6 +9,8 @@ class C extends test5.walking {
 }
 
 mixin class flutter {
+  flutter();
+  String? x;
   void fun() {
     print("Flutter mixin: fun");
   }
@@ -28,15 +30,13 @@ abstract interface class abs {
   void fun();
 }
 
-class testClass extends abs with flutter, dart {
+class testClass extends abs with dart {
   void fun() {
     flutter().fun();
   }
 }
 
-abstract class x {
-  
-}
+abstract class x {}
 
 class z extends x {
   void method() {
@@ -46,7 +46,7 @@ class z extends x {
 
 class y extends z with dart {
   y() : super();
-  
+
   @override
   void method() {
     super.method();
@@ -54,10 +54,10 @@ class y extends z with dart {
 }
 
 void main() {
-  C c = C();
-  c.method();
-  z obj = y();
-  obj.method();
+  // C c = C();
+  // c.method();
+  // z obj = y();
+  // obj.method();
   testClass test = testClass();
   test.fun();
 }

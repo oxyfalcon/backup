@@ -1,4 +1,5 @@
-import 'package:app/button/add_button.dart';
+import 'package:app/button/main_buttons/add_button.dart';
+import 'package:app/button/main_buttons/done_list_button.dart';
 import 'package:flutter/material.dart';
 
 class NoToDoList extends StatelessWidget {
@@ -16,8 +17,16 @@ class NoToDoList extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Container(
-                alignment: Alignment.bottomRight, child: const AddButton()),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                    alignment: Alignment.bottomRight,
+                    child: const DoneListButton()),
+                Container(
+                    alignment: Alignment.bottomRight, child: const AddButton()),
+              ],
+            ),
           )
         ]));
   }

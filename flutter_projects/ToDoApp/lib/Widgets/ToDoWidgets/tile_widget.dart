@@ -24,7 +24,6 @@ class _TileWidgetState extends State<TileWidget> {
     super.dispose();
     print("dispose: TILESTATE WIDGET");
   }
-  // final int _selectedValue = 0;
 
   @override
   Widget build(BuildContext context) {

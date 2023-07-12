@@ -96,12 +96,12 @@ abstract mixin class M1 {
 abstract mixin class M2 {
   int foo(int i);
   int bar(int i) => i > 0 ? foo(i ~/ 2) : 24;
-  void method2() {
+  void method1() {
     print("M2 mixin print");
   }
 }
 
-class C = Object with M1, M2;
+class C = Object with M2, M1;
 
 Function createClosure() {
   int count = 0;
@@ -115,32 +115,32 @@ Function createClosure() {
 int Function(int x) wannabeFunction = B(10);
 
 void main() {
-  B obj = B(20);
-  obj.method1();
-  obj(10);
+  // B obj = B(20);
+  // obj.method1();
+  // obj(10);
 
-  AA objBB = AA.hello();
+  // AA objBB = AA.hello();
   C objc = C();
   objc.method1();
-  objc.method2();
-  objBB.method1();
+  // objc.method2();
+  // objBB.method1();
 
-  wannabeFunction(20);
-  int funn = wannabeFunction(10);
-  print(funn);
+  // wannabeFunction(20);
+  // int funn = wannabeFunction(10);
+  // print(funn);
 
-  String Function(int) test = (int x) => x.toString();
-  // String? x = Random().nextBool() ? "not null" : null;
-  // String Function(int)? fun = (int? n) => "$n";
+  // String Function(int) test = (int x) => x.toString();
+  // // String? x = Random().nextBool() ? "not null" : null;
+  // // String Function(int)? fun = (int? n) => "$n";
 
-  String Function(int)? callbacks = Random().nextBool() ? test : null;
-  print("callback: ${callbacks?.call(10)}");
-  // print("callbacks! : ${callbacks!(1)}");
+  // String Function(int)? callbacks = Random().nextBool() ? test : null;
+  // print("callback: ${callbacks?.call(10)}");
+  // // print("callbacks! : ${callbacks!(1)}");
 
-  String Function(int) f = (int x) => "$x";
-  print(f(1)); // Prints "1".
+  // String Function(int) f = (int x) => "$x";
+  // print(f(1)); // Prints "1".
 
-  var closure = createClosure();
-  closure(); // Prints: Count: 1
-  closure(); // Prints: Count: 2
+  // var closure = createClosure();
+  // closure(); // Prints: Count: 1
+  // closure(); // Prints: Count: 2
 }

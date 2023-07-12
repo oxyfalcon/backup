@@ -27,46 +27,41 @@ Future<dynamic> dialog(
       context: context,
       builder: (context) => AlertDialog.adaptive(
             title: const Text("Enter Todo"),
-            content: StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
-              return Material(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onChanged: (value) {
-                          newTodo.todo = title.text;
-                        },
-                        onEditingComplete: () {
-                          newTodo.todo = title.text;
-                        },
-                        autofocus: true,
-                        decoration: const InputDecoration(
-                          hintText: "Enter Todo",
-                        ),
-                        controller: title,
-                      ),
+            content: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      newTodo.todo = title.text;
+                    },
+                    onEditingComplete: () {
+                      newTodo.todo = title.text;
+                    },
+                    autofocus: true,
+                    decoration: const InputDecoration(
+                      hintText: "Enter Todo",
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        onChanged: (value) {
-                          newTodo.description = description.text;
-                        },
-                        onEditingComplete: () {
-                          newTodo.description = description.text;
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Enter Description",
-                        ),
-                        controller: description,
-                      ),
-                    )
-                  ],
+                    controller: title,
+                  ),
                 ),
-              );
-            }),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      newTodo.description = description.text;
+                    },
+                    onEditingComplete: () {
+                      newTodo.description = description.text;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: "Enter Description",
+                    ),
+                    controller: description,
+                  ),
+                )
+              ],
+            ),
             actions: <Widget>[
               TextButton.icon(
                   onPressed: () {
@@ -82,7 +77,7 @@ Future<dynamic> dialog(
                   onPressed: () {
                     if (title.text != "" && description.text != "") {
                       (edit)
-                          ? todoState.editTodo(original: todo, edited: newTodo)
+                          ? todoState.editTodo(newTodo)
                           : todoState.addTodo(newTodo);
                       title.clear();
                       description.clear();
