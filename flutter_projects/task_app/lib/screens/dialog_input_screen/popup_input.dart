@@ -76,9 +76,12 @@ Future<dynamic> dialog(
               TextButton.icon(
                   onPressed: () {
                     if (title.text != "" && description.text != "") {
-                      (edit)
-                          ? todoState.editTodo(newTodo)
-                          : todoState.addTodo(newTodo);
+                      if (edit) {
+                        todoState.editTodo(newTodo);
+                      } else {
+                        todoState.addTodo(newTodo);
+                        todoState.postTodo(newTodo);
+                      }
                       title.clear();
                       description.clear();
                       Navigator.of(context).pop();
