@@ -1,3 +1,4 @@
+import 'package:app/Provider/future_provider.dart';
 import 'package:app/button/main_buttons/add_button.dart';
 import 'package:app/button/todo_list_page_buttons/delete_button.dart';
 import 'package:app/button/todo_list_page_buttons/edit_button.dart';
@@ -43,42 +44,48 @@ class Tiles extends ConsumerStatefulWidget {
 class _TilesState extends ConsumerState<Tiles> {
   @override
   Widget build(BuildContext context) {
-    List<Todo> list = ref.watch(todoProvider);
     final todoState = ref.watch(todoProvider.notifier);
-    return Column(children: <Widget>[
-      for (final itr in list)
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            child: CheckboxListTile.adaptive(
-                controlAffinity: ListTileControlAffinity.leading,
-                selected: itr.completed,
-                title: Text(itr.todo),
-                subtitle: Text(itr.description),
-                value: itr.completed,
-                secondary: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      EditButton(itr: itr),
-                      DeleteButton(todoState: todoState, itr: itr),
-                    ]),
-                selectedTileColor: Theme.of(context)
-                    .copyWith(
-                        colorScheme:
-                            ColorScheme.fromSeed(seedColor: Colors.green))
-                    .colorScheme
-                    .secondaryContainer,
-                onChanged: (change) {
-                  (change!)
-                      ? todoState.markedAdd(itr)
-                      : todoState.markedDelete(itr);
-                  setState(() {
-                    itr.completed = change;
-                  });
-                }),
-          ),
-        ),
-    ]);
+    final newList = ref.watch(futureTodoListProvider);
+    return newList.when(
+        data: (data) => Builder(
+            builder: (context) => Column(children: [
+                  for (final itr in data)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        child: CheckboxListTile.adaptive(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            selected: itr.completed,
+                            title: Text(itr.todo),
+                            subtitle: Text(itr.description),
+                            value: itr.completed,
+                            secondary: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  EditButton(itr: itr),
+                                  DeleteButton(todoState: todoState, itr: itr),
+                                ]),
+                            selectedTileColor: Theme.of(context)
+                                .copyWith(
+                                    colorScheme: ColorScheme.fromSeed(
+                                        seedColor: Colors.green))
+                                .colorScheme
+                                .secondaryContainer,
+                            onChanged: (change) {
+                              (change!)
+                                  ? todoState.markedAdd(itr)
+                                  : todoState.markedDelete(itr);
+                              setState(() {
+                                itr.completed = change;
+                              });
+                            }),
+                      ),
+                    )
+                ])),
+        error: (error, stacktrace) => Text(error.toString()),
+        loading: () {
+          return const Center(child: CircleAvatar());
+        });
   }
 }

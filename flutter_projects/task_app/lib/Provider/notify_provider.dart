@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:app/screens/todo_list_screen/no_to_list.dart';
 import 'package:app/screens/done_list_screen/marked_no_to_do_list.dart';
 import 'package:app/screens/done_list_screen/marked_todo_list.dart';
 import 'package:app/screens/todo_list_screen/todo_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 class Todo {
   String todo;
@@ -12,6 +15,10 @@ class Todo {
   bool completed = false;
 
   Todo({required this.todo, required this.description, required this.id});
+
+  factory Todo.fromJson(Map<String, dynamic> m) {
+    return Todo(todo: m['title'], description: m['description'], id: m['_id']);
+  }
 }
 
 final todoProvider = NotifierProvider<TodoList, List<Todo>>(() {
@@ -24,8 +31,40 @@ class TodoList extends Notifier<List<Todo>> {
     return [];
   }
 
+  Future<http.Response> fetchTodo() async {
+    final response =
+        await http.get(Uri.parse("https://api.nstack.in/v1/todos"));
+    print("Fetch Response: ${response.body}");
+    return response;
+  }
+
+  void postTodo(Todo t) async {
+    final response = await http.post(
+        Uri.parse("https://api.nstack.in/v1/todos"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "title": t.todo,
+          "description": t.description,
+          "is_completed": t.completed
+        }));
+    print(response.statusCode);
+  }
+
   void addTodo(Todo t) {
     state = [...state, t];
+  }
+
+  Future<http.Response> deleteTodo(Todo t) async {
+    final response = await http.delete(
+        Uri.parse("https://api.nstack.in/v1/todos/"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "title": t.todo,
+          "description": t.description,
+          "is_completed": t.completed
+        }));
+    print("delete response: ${response.statusCode}");
+    return response;
   }
 
   void deleTodo(Todo t) {
