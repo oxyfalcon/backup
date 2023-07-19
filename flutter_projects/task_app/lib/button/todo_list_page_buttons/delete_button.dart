@@ -1,3 +1,4 @@
+import 'package:app/Provider/future_provider.dart';
 import 'package:app/Provider/notify_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class DeleteButton extends StatelessWidget {
     required this.itr,
   });
 
-  final TodoList todoState;
+  final FutureTodoListNotifier todoState;
   final Todo itr;
 
   @override
@@ -16,7 +17,7 @@ class DeleteButton extends StatelessWidget {
     return IconButton.filled(
       color: Theme.of(context).cardColor,
       onPressed: () {
-        todoState.deleTodo(itr);
+        todoState.deleteTodo(itr);
       },
       icon: const Icon(Icons.delete),
     );

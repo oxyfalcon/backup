@@ -1,3 +1,4 @@
+import 'package:app/Provider/future_provider.dart';
 import 'package:app/Provider/notify_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class DoneDeleteButton extends StatelessWidget {
     required this.itr,
   });
 
-  final TodoList todoState;
+  final FutureTodoListNotifier todoState;
   final Todo itr;
 
   @override

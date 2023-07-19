@@ -6,6 +6,7 @@ class Point {
 }
 
 class Geek1 {
+  static final String k = "";
   final String firstName;
   const Geek1(this.firstName);
   void test() {

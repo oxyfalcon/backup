@@ -20,10 +20,7 @@ class _AddButtonState extends ConsumerState<AddButton> {
           openDialog(
               context: context,
               ref: ref,
-              todo: Todo(
-                  todo: "",
-                  description: "",
-                  id: ref.watch(idProvider.notifier).state++),
+              todo: Todo(todo: "", description: "", id: ""),
               edit: false);
         }));
   }

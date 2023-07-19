@@ -3,18 +3,18 @@ Future<int> divider() {
 }
 
 Future<List<int>> getList(List<int> list) async {
-  Future<List<int>> number = divider()
+  Future<List<int>> n = divider()
       .then((number) => List<int>.from(
           list.where((element) => element % number == 0 ? true : false)))
       .then((value) {
     print("object");
     return value;
   });
-  print("From Future Class: $number");
+  print("From Future Class: $n");
 
   // var ans = List<int>.from(
   //     list.where((element) => element % number == 0 ? true : false));
-  return number;
+  return n;
 }
 
 Future<int> temp() {
@@ -30,8 +30,8 @@ Stream<int> stream() async* {
 
 void main() async {
   List<int> l = List.generate(100, (index) => index);
-  temp().then((value) => print("temp val returned: $value"));
-  print("temp val instance: ${temp()}");
+  // temp().then((value) => print("temp val returned: $value"));
+  // print("temp val instance: ${temp()}");
 
   var x = getList(l);
   x.then(
