@@ -63,8 +63,8 @@ class FutureTodoListNotifier extends AsyncNotifier<List<Todo>> {
     });
   }
 
-  void markedAdd(Todo edited) async {
-    // state = const AsyncValue.loading();
+  Future<void> markedAdd(Todo edited) async {
+    state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       http.put(Uri.parse("https://api.nstack.in/v1/todos/${edited.id}"),
           headers: header,
