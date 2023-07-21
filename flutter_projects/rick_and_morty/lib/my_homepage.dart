@@ -1,12 +1,7 @@
+import 'package:app/api_provider.dart';
 import 'package:app/item_page.dart';
 import 'package:flutter/material.dart';
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Options {
   final String text;
@@ -21,28 +16,35 @@ List<Options> options = const [
   Options(text: "Episode", icon: Icon(Icons.tv))
 ];
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+class MyHomePage extends ConsumerStatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var selectedIndexState = ref.watch(valueProvider.notifier);
+    var index = ref.watch(valueProvider);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Rick And Morty"),
+        title: Text(options[index].text),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.horizontal(
                 right: Radius.circular(10), left: Radius.circular(10))),
       ),
-      body: ItemList(),
+      body: const ItemList(),
       backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       drawer: NavigationDrawer(
         onDestinationSelected: (value) {
-          setState(() {
-            _selectedIndex = value;
-          });
+          selectedIndexState.change(value);
           Navigator.of(context).pop();
         },
-        selectedIndex: _selectedIndex,
+        selectedIndex: index,
         children: [
           ...options.map((e) {
             return NavigationDrawerDestination(

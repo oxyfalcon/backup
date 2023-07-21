@@ -1,3 +1,4 @@
+import 'package:app/api_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
@@ -21,15 +22,36 @@ class _ItemListState extends ConsumerState<ItemList> {
             autofocus: false,
             controller: search,
             decoration: const InputDecoration(
-              enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+              border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
               label: Text("Search"),
-              hintText: "seach",
             ),
           ),
         ),
-        Card()
+        const DisplayList(),
       ],
     );
+  }
+}
+
+class DisplayList extends ConsumerWidget {
+  const DisplayList({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locationState = ref.watch(apiProvider);
+    return locationState.when(
+        data: (list) => Expanded(
+              child: ListView(
+                children: [
+                  for (var itr in list)
+                    ListTile(
+                      title: Text(itr.name),
+                    )
+                ],
+              ),
+            ),
+        error: (error, stacktrace) => Text(error.toString()),
+        loading: () => const Center(child: CircularProgressIndicator()));
   }
 }
