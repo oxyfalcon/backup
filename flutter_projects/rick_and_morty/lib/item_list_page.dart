@@ -4,16 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ItemList extends ConsumerStatefulWidget {
+class ItemList extends ConsumerWidget {
   const ItemList({super.key});
 
   @override
-  ConsumerState<ItemList> createState() => _ItemListState();
-}
-
-class _ItemListState extends ConsumerState<ItemList> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -36,29 +31,25 @@ class _MoreDisplayMenuState extends ConsumerState<MoreDisplayMenu> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
-    final page = ref.watch(apiProvider.notifier).pageNumber;
-    final changePage = ref.watch(apiProvider.notifier);
-    List<int> list = List.generate(page, (index) => index + 1);
-    print("List Length: ${list.length}");
+    print("MoreDisplayMenu build");
+    ref.watch(apiProvider);
+    List<int> list = List.generate(
+        ref.watch(apiProvider.notifier).pageNumber, (index) => index + 1);
 
     return DropdownButton<int>(
+      alignment: AlignmentDirectional.centerEnd,
       icon: const Icon(Icons.arrow_downward),
       items: list
           .map((int value) => DropdownMenuItem<int>(
                 value: value,
                 child: Text(
                   "$value",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
                 ),
               ))
           .toList(),
       onChanged: (int? value) {
-        changePage.getPage(value);
+        ref.watch(apiProvider.notifier).getPage(value);
         _selectedValue = value;
       },
       value: _selectedValue,
@@ -71,6 +62,7 @@ class DisplayList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("DisplayList build");
     final value = ref.read(valueProvider);
     final getList = ref.watch(apiProvider);
     return getList.when(

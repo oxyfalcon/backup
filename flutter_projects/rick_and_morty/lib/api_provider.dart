@@ -43,7 +43,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
     pageNumber = jsonDecode(response.body)['info']['pages'];
-    print(pageNumber);
     List<Character> characterList = [];
     for (var itr in json) {
       characterList.add(Character.fromJson(itr));
@@ -55,7 +54,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
     pageNumber = jsonDecode(response.body)['info']['pages'];
-    print(pageNumber);
     List<Location> locationList = [];
     for (var itr in json) {
       locationList.add(Location.fromJson(itr));
@@ -67,7 +65,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
     pageNumber = jsonDecode(response.body)['info']['pages'];
-    print(pageNumber);
     List<Episode> episodeList = [];
     for (var itr in json) {
       episodeList.add(Episode.fromJson(itr));
