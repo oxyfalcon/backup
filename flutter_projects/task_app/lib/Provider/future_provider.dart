@@ -22,10 +22,11 @@ class FutureTodoListNotifier extends AsyncNotifier<List<Todo>> {
 
   @override
   Future<List<Todo>> build() {
+    print("Provider: build");
     return _fetchTodo();
   }
 
-  Future<void> addTodo(Todo t) async {
+  void addTodo(Todo t) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await http.post(Uri.parse("https://api.nstack.in/v1/todos"),

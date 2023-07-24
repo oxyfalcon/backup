@@ -1,5 +1,5 @@
 import 'package:app/api_provider.dart';
-import 'package:app/item_page.dart';
+import 'package:app/item_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +32,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(options[index].text),
+        title: Text(
+          options[index].text,
+        ),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.horizontal(
                 right: Radius.circular(10), left: Radius.circular(10))),

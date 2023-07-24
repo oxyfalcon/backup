@@ -82,8 +82,6 @@ class _TilesState extends ConsumerState<Tiles> {
                                   .colorScheme
                                   .secondaryContainer,
                               onChanged: (change) {
-                                print(change);
-                                // futureState.markedAdd(itr);
                                 setState(() {
                                   itr.completed = change!;
                                 });

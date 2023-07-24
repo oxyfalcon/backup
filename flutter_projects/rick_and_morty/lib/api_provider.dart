@@ -5,40 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/schema/episode_schema.dart';
 
-String baseUrl = "https://rickandmortyapi.com/api/";
-
-final characterProvider = FutureProvider<List<Character>>((ref) async {
-  final response = await http.get(Uri.parse("$baseUrl/character"));
-  var json = jsonDecode(response.body)['results'];
-  List<Character> characterList = [];
-  for (var itr in json) {
-    characterList.add(Character.fromJson(itr));
-  }
-  return characterList;
-});
-
-final locationProvider = FutureProvider<List<Location>>((ref) async {
-  var url = Uri.parse("$baseUrl/location");
-  final response = await http.get(url);
-  var json = jsonDecode(response.body)['results'];
-  List<Location> locationList = [];
-  for (var itr in json) {
-    locationList.add(Location.fromJson(itr));
-  }
-  return locationList;
-});
-
-final episodeProvider = FutureProvider<List<Episode>>((ref) async {
-  var url = Uri.parse("$baseUrl/episode");
-  final response = await http.get(url);
-  var json = jsonDecode(response.body)['results'];
-  List<Episode> episodeList = [];
-  for (var itr in json) {
-    episodeList.add(Episode.fromJson(itr));
-  }
-  return episodeList;
-});
-
 class ValueNotifier extends StateNotifier<int> {
   ValueNotifier() : super(0);
 
@@ -50,32 +16,86 @@ class ValueNotifier extends StateNotifier<int> {
 final valueProvider =
     StateNotifierProvider<ValueNotifier, int>((ref) => ValueNotifier());
 
-class ApiNotifier extends AsyncNotifier<List> {
+class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
+  static const String _baseUrl = "https://rickandmortyapi.com/api/";
+  String str = "";
+  int pageNumber = 0;
   @override
-  List build() {
+  Future<List<dynamic>> build() {
     final val = ref.watch(valueProvider);
-    final locationList = ref.watch(locationProvider);
-    final episodeList = ref.read(episodeProvider);
-    final characterList = ref.read(characterProvider);
-
     switch (val) {
       case 0:
-        return characterList.when(
-            data: (data) => data,
-            error: (error, stacktrace) => [],
-            loading: () => []);
-
+        str = "$_baseUrl/character";
+        return getCharacterResponse(http.get(Uri.parse(str)));
       case 1:
-        return locationList.whenData((value) => value).value!;
-
+        str = "$_baseUrl/location";
+        return getLocationResponse(http.get(Uri.parse(str)));
       case 2:
-        return episodeList.whenData((value) => value).value!;
+        str = "$_baseUrl/episode";
 
+        return getEpisodeResponse(http.get(Uri.parse(str)));
       default:
-        throw ("Error in API_NOTIFIER");
+        throw ("Error In GetProvider");
+    }
+  }
+
+  Future<List<Character>> getCharacterResponse(Future<http.Response> r) async {
+    final response = await r;
+    var json = jsonDecode(response.body)['results'];
+    pageNumber = jsonDecode(response.body)['info']['pages'];
+    print(pageNumber);
+    List<Character> characterList = [];
+    for (var itr in json) {
+      characterList.add(Character.fromJson(itr));
+    }
+    return characterList;
+  }
+
+  Future<List<Location>> getLocationResponse(Future<http.Response> r) async {
+    final response = await r;
+    var json = jsonDecode(response.body)['results'];
+    pageNumber = jsonDecode(response.body)['info']['pages'];
+    print(pageNumber);
+    List<Location> locationList = [];
+    for (var itr in json) {
+      locationList.add(Location.fromJson(itr));
+    }
+    return locationList;
+  }
+
+  Future<List<Episode>> getEpisodeResponse(Future<http.Response> r) async {
+    final response = await r;
+    var json = jsonDecode(response.body)['results'];
+    pageNumber = jsonDecode(response.body)['info']['pages'];
+    print(pageNumber);
+    List<Episode> episodeList = [];
+    for (var itr in json) {
+      episodeList.add(Episode.fromJson(itr));
+    }
+    return episodeList;
+  }
+
+  void getPage(int? index) async {
+    final val = ref.read(valueProvider);
+    switch (val) {
+      case 0:
+        state = const AsyncValue.loading();
+        state = await AsyncValue.guard(() => getCharacterResponse(
+            http.get(Uri.parse("$_baseUrl/character?page=$index"))));
+      case 1:
+        state = const AsyncValue.loading();
+        state = await AsyncValue.guard(() => getLocationResponse(
+            http.get(Uri.parse("$_baseUrl/location?page=$index"))));
+      case 2:
+        state = const AsyncValue.loading();
+        state = await AsyncValue.guard(() => getEpisodeResponse(
+            http.get(Uri.parse("$_baseUrl/episode?page=$index"))));
+      default:
+        throw ("Error In GetProvider");
     }
   }
 }
 
-final apiProvider =
-    AsyncNotifierProvider<ApiNotifier, List>(() => ApiNotifier());
+final apiProvider = AsyncNotifierProvider.autoDispose<Api, List>(() {
+  return Api();
+});

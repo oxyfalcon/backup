@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
     return ProviderScope(
       child: MaterialApp(
         theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
             useMaterial3: true),
         title: "Rick And Morty",
         home: const Material(child: MyHomePage()),
