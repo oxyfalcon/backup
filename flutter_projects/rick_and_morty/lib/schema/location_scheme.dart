@@ -1,6 +1,4 @@
-import 'package:app/schema/abstract.dart';
-
-class Location extends Schema {
+class Location {
   Location({
     required this.id,
     required this.name,

@@ -1,6 +1,4 @@
-import 'package:app/schema/abstract.dart';
-
-class Episode extends Schema {
+class Episode {
   Episode({
     required this.id,
     required this.name,

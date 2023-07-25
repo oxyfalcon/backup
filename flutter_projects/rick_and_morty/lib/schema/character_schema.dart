@@ -1,6 +1,4 @@
-import 'package:app/schema/abstract.dart';
-
-class Character extends Schema {
+class Character {
   Character({
     required this.id,
     required this.name,

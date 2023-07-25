@@ -17,6 +17,7 @@ class CharacterDisplayPage extends StatelessWidget {
         child: Column(children: [
           Expanded(child: Image.network(itr.image)),
           Expanded(
+            flex: 2,
             child: SizedBox.expand(
               child: Center(
                 child: Text(itr.name),

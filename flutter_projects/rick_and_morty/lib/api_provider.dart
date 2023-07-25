@@ -7,8 +7,9 @@ import 'package:app/schema/episode_schema.dart';
 
 class ValueNotifier extends StateNotifier<int> {
   ValueNotifier() : super(0);
-
+  int? index = 1;
   void change(int value) {
+    index = 1;
     state = value;
   }
 }
@@ -17,9 +18,8 @@ final valueProvider =
     StateNotifierProvider<ValueNotifier, int>((ref) => ValueNotifier());
 
 class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
-  static const String _baseUrl = "https://rickandmortyapi.com/api/";
+  final String _baseUrl = "https://rickandmortyapi.com/api/";
   String str = "";
-  int pageNumber = 0;
   @override
   Future<List<dynamic>> build() {
     final val = ref.watch(valueProvider);
@@ -42,7 +42,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   Future<List<Character>> getCharacterResponse(Future<http.Response> r) async {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
-    pageNumber = jsonDecode(response.body)['info']['pages'];
     List<Character> characterList = [];
     for (var itr in json) {
       characterList.add(Character.fromJson(itr));
@@ -53,7 +52,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   Future<List<Location>> getLocationResponse(Future<http.Response> r) async {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
-    pageNumber = jsonDecode(response.body)['info']['pages'];
     List<Location> locationList = [];
     for (var itr in json) {
       locationList.add(Location.fromJson(itr));
@@ -64,7 +62,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   Future<List<Episode>> getEpisodeResponse(Future<http.Response> r) async {
     final response = await r;
     var json = jsonDecode(response.body)['results'];
-    pageNumber = jsonDecode(response.body)['info']['pages'];
     List<Episode> episodeList = [];
     for (var itr in json) {
       episodeList.add(Episode.fromJson(itr));
@@ -90,6 +87,13 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
       default:
         throw ("Error In GetProvider");
     }
+  }
+
+  Future<List<int>> pagelistGenerator() async {
+    final response = await http.get(Uri.parse(str));
+    var length = jsonDecode(response.body)['info']['pages'];
+    List<int> pageGenerator = List.generate(length, (index) => index + 1);
+    return pageGenerator;
   }
 }
 
