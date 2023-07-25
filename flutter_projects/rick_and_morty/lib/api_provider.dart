@@ -1,21 +1,10 @@
 import 'dart:convert';
+import 'package:app/local_provider.dart';
 import 'package:app/schema/character_schema.dart';
 import 'package:app/schema/location_scheme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/schema/episode_schema.dart';
-
-class ValueNotifier extends StateNotifier<int> {
-  ValueNotifier() : super(0);
-  int? index = 1;
-  void change(int value) {
-    index = 1;
-    state = value;
-  }
-}
-
-final valueProvider =
-    StateNotifierProvider<ValueNotifier, int>((ref) => ValueNotifier());
 
 class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   final String _baseUrl = "https://rickandmortyapi.com/api/";
@@ -97,6 +86,4 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   }
 }
 
-final apiProvider = AsyncNotifierProvider.autoDispose<Api, List>(() {
-  return Api();
-});
+final apiProvider = AsyncNotifierProvider.autoDispose<Api, List>(() => Api());

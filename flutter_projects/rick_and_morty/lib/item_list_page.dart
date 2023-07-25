@@ -1,8 +1,10 @@
 import 'package:app/api_provider.dart';
 import 'package:app/character_display_page.dart';
+import 'package:app/character_search.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:app/local_provider.dart';
 
 class ItemList extends ConsumerWidget {
   const ItemList({super.key});
@@ -15,9 +17,16 @@ class ItemList extends ConsumerWidget {
       children: [
         Container(
           alignment: Alignment.topRight,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: MoreDisplayMenu(),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CharacterSearch(),
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: MoreDisplayMenu(),
+              ),
+            ],
           ),
         ),
         const Expanded(child: DisplayList()),
