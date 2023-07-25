@@ -1,4 +1,3 @@
-import 'package:app/local_provider.dart';
 import 'package:app/schema/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +18,9 @@ class _CharacterSearchState extends State<CharacterSearch> {
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
-              title: Text("Search"),
+              title: const Text("Search"),
               leading: IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: Navigator.of(context).pop,
               ),
               centerTitle: false,
@@ -59,7 +58,7 @@ class _CharacterSearchState extends State<CharacterSearch> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        onPressed: () => openDialog(context), icon: Icon(Icons.search));
+        onPressed: () => openDialog(context), icon: const Icon(Icons.search));
   }
 }
 
@@ -75,12 +74,11 @@ class _StatusButtonState extends ConsumerState<StatusButton> {
 
   @override
   Widget build(BuildContext context) {
-    CharacterItems newStatusValue = ref.watch(characterProvider);
     return SegmentedButton<CharacterStatus>(
       emptySelectionAllowed: true,
       showSelectedIcon: false,
-      segments: <ButtonSegment<CharacterStatus>>[
-        ButtonSegment(value: newStatusValue.status, label: Text("Alive")),
+      segments: const <ButtonSegment<CharacterStatus>>[
+        ButtonSegment(value: CharacterStatus.alive, label: Text("Alive")),
         ButtonSegment(value: CharacterStatus.dead, label: Text("Dead")),
         ButtonSegment(value: CharacterStatus.unknown, label: Text("Unknown")),
       ],

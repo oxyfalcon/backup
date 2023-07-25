@@ -27,5 +27,5 @@ class CharacterSearchNotifier extends Notifier<CharacterItems> {
 }
 
 final characterProvider =
-    NotifierProvider.autoDispose<CharacterSearchNotifier, CharacterItems>(
+    NotifierProvider<CharacterSearchNotifier, CharacterItems>(
         () => CharacterSearchNotifier());
