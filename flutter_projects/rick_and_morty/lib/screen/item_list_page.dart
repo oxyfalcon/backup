@@ -1,6 +1,6 @@
 import 'package:app/Provider/api_provider.dart';
 import 'package:app/screen/character_display_page.dart';
-import 'package:app/screen/character_search.dart';
+import 'package:app/screen/search.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

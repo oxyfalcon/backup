@@ -17,7 +17,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   @override
   Future<List<dynamic>> build() {
     str = ref.read(valueProvider.notifier).str();
-    print("build");
     return getResponseList("$_baseUrl$str");
   }
 
@@ -53,7 +52,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   }
 
   void getPage(int? index) async {
-    print("GETPAGE: $_baseUrl$str?$page$index&$filter");
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
         () => getResponseList("$_baseUrl$str?$page$index&$filter"));
@@ -84,7 +82,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   }
 
   void getSearchItems(String r) async {
-    print("getSearchItems: $_baseUrl$str?$r");
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => getResponseList("$_baseUrl$str?$r"));
   }

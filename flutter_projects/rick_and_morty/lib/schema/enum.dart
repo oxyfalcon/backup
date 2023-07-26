@@ -49,5 +49,3 @@ class LocationItems {
   LocationItems({required this.name, required this.dimension});
   LocationItems.empty() : this(name: "", dimension: "");
 }
-
-class EpisodeItems {}
