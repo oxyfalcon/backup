@@ -1,17 +1,16 @@
-import 'package:app/api_provider.dart';
-import 'package:app/character_display_page.dart';
-import 'package:app/character_search.dart';
+import 'package:app/Provider/api_provider.dart';
+import 'package:app/screen/character_display_page.dart';
+import 'package:app/screen/character_search.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:app/local_provider.dart';
+import 'package:app/Provider/local_provider.dart';
 
 class ItemList extends ConsumerWidget {
   const ItemList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(valueProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -21,7 +20,8 @@ class ItemList extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              CharacterSearch(),
+              HomeButton(),
+              Search(),
               Padding(
                 padding: EdgeInsets.only(right: 10),
                 child: MoreDisplayMenu(),
@@ -47,35 +47,28 @@ class _MoreDisplayMenuState extends ConsumerState<MoreDisplayMenu> {
   @override
   Widget build(BuildContext context) {
     ref.watch(apiProvider);
-    final state = ref.watch(apiProvider.notifier);
-    final value = state.pagelistGenerator();
+    List<int> list = List.generate(
+        ref.read(apiProvider.notifier).length, (index) => index + 1);
 
-    return FutureBuilder(
-        builder: (context, AsyncSnapshot<List<int>> snapshot) {
-          List<DropdownMenuItem<int>> children;
-          if (snapshot.hasData) {
-            children = snapshot.data!
-                .map((int value) => DropdownMenuItem<int>(
-                      value: value,
-                      child: Text(
-                        "$value",
-                        textAlign: TextAlign.right,
-                      ),
-                    ))
-                .toList();
-          } else {
-            children = [];
-          }
-          return DropdownButton(
-              items: children,
-              onChanged: (int? value) {
-                state.getPage(value);
-                ref.watch(valueProvider.notifier).index = value;
-                selectedValue = value;
-              },
-              value: ref.watch(valueProvider.notifier).index);
-        },
-        future: value);
+    return DropdownButton<int>(
+      alignment: AlignmentDirectional.centerEnd,
+      icon: const Icon(Icons.arrow_downward),
+      items: list
+          .map((int value) => DropdownMenuItem<int>(
+                value: value,
+                child: Text(
+                  "$value",
+                  textAlign: TextAlign.right,
+                ),
+              ))
+          .toList(),
+      onChanged: (int? value) {
+        ref.watch(apiProvider.notifier).getPage(value);
+        selectedValue = value;
+        ref.watch(valueProvider.notifier).index = value;
+      },
+      value: ref.watch(valueProvider.notifier).index,
+    );
   }
 }
 
@@ -87,7 +80,9 @@ class DisplayList extends ConsumerWidget {
     final value = ref.read(valueProvider);
     final getList = ref.watch(apiProvider);
     return getList.when(
-        data: (list) => ListView(
+        data: (list) {
+          if (list.isNotEmpty) {
+            return ListView(
               children: [
                 for (var itr in list)
                   Padding(
@@ -114,10 +109,31 @@ class DisplayList extends ConsumerWidget {
                     ),
                   ),
               ],
-            ),
+            );
+          } else {
+            return Center(
+              child: FittedBox(
+                  child: Text("No results",
+                      style: Theme.of(context).textTheme.labelLarge)),
+            );
+          }
+        },
         error: (error, stackTrace) => Text(error.toString()),
         loading: () => Container(
             alignment: Alignment.center,
             child: const CircularProgressIndicator()));
+  }
+}
+
+class HomeButton extends ConsumerWidget {
+  const HomeButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+        onPressed: () {
+          ref.watch(apiProvider.notifier).homePage();
+        },
+        icon: const Icon(Icons.home));
   }
 }

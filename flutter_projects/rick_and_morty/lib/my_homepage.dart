@@ -1,5 +1,5 @@
-import 'package:app/local_provider.dart';
-import 'package:app/item_list_page.dart';
+import 'package:app/Provider/local_provider.dart';
+import 'package:app/screen/item_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
