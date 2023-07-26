@@ -26,14 +26,4 @@ class Location {
         url: json["url"],
         created: DateTime.parse(json["created"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "type": type,
-        "dimension": dimension,
-        "residents": List<dynamic>.from(residents.map((x) => x)),
-        "url": url,
-        "created": created.toIso8601String(),
-      };
 }

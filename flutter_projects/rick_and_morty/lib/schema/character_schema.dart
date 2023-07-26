@@ -41,21 +41,6 @@ class Character {
         url: json["url"],
         created: DateTime.parse(json["created"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "status": status,
-        "species": species,
-        "type": type,
-        "gender": gender,
-        "origin": origin.toJson(),
-        "location": location.toJson(),
-        "image": image,
-        "episode": List<dynamic>.from(episode.map((x) => x)),
-        "url": url,
-        "created": created.toIso8601String(),
-      };
 }
 
 class CharacterLocation {
@@ -72,9 +57,4 @@ class CharacterLocation {
         name: json["name"],
         url: json["url"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "url": url,
-      };
 }

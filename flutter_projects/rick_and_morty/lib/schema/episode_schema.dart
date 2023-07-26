@@ -26,14 +26,4 @@ class Episode {
         url: json["url"],
         created: DateTime.parse(json["created"]),
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "air_date": airDate,
-        "episode": episode,
-        "characters": List<dynamic>.from(characters.map((x) => x)),
-        "url": url,
-        "created": created.toIso8601String(),
-      };
 }
