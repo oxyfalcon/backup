@@ -32,6 +32,7 @@ final characterSpeciesValues = <CharacterSpecies, String>{
 final characterStatusValues = <CharacterStatus, String>{
   CharacterStatus.alive: "Alive",
   CharacterStatus.dead: "Dead",
+  CharacterStatus.unknown: "unknown",
   CharacterStatus.empty: "",
 };
 
