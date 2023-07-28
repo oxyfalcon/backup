@@ -90,6 +90,7 @@ class _SearchState extends ConsumerState<Search> {
               child: SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
+                    centerTitle: false,
                     title: const Text("Search"),
                     actions: [
                       TextButton(
@@ -141,17 +142,33 @@ class _SearchState extends ConsumerState<Search> {
   }
 
   Future openDialogEpisodes(BuildContext context) {
+    TextEditingController episodeName = TextEditingController();
     return showAdaptiveDialog(
         context: context,
         builder: (context) => Dialog.fullscreen(
               child: SafeArea(
                   child: Scaffold(
                 appBar: AppBar(
+                  centerTitle: false,
                   title: const Text("Search"),
                   leading: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(Icons.close)),
                 ),
+                body: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: episodeName,
+                      decoration: const InputDecoration(
+                          hintText: "Episode Name",
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder()),
+                    ),
+                  ),
+                  const SeasonSelectionButton(),
+                  const EpisodeListTiles()
+                ]),
               )),
             ));
   }
@@ -159,6 +176,7 @@ class _SearchState extends ConsumerState<Search> {
   @override
   Widget build(BuildContext context) {
     int val = ref.watch(valueProvider);
+
     return IconButton(
         onPressed: () {
           switch (val) {
@@ -176,6 +194,72 @@ class _SearchState extends ConsumerState<Search> {
           }
         },
         icon: const Icon(Icons.search));
+  }
+}
+
+class SeasonSelectionButton extends ConsumerStatefulWidget {
+  const SeasonSelectionButton({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SeasonSelectionButtonState();
+}
+
+class _SeasonSelectionButtonState extends ConsumerState<SeasonSelectionButton> {
+  SeasonNumber number = SeasonNumber.empty;
+
+  @override
+  Widget build(BuildContext context) {
+    var seasonNumber = ref.watch(seasonProvider);
+
+    return SegmentedButton<SeasonNumber>(
+      emptySelectionAllowed: true,
+      showSelectedIcon: false,
+      segments: const <ButtonSegment<SeasonNumber>>[
+        ButtonSegment(value: SeasonNumber.S01, label: Text("S01")),
+        ButtonSegment(value: SeasonNumber.S02, label: Text("S02")),
+        ButtonSegment(value: SeasonNumber.S03, label: Text("S03")),
+        ButtonSegment(value: SeasonNumber.S04, label: Text("S04")),
+        ButtonSegment(value: SeasonNumber.S05, label: Text("S05")),
+      ],
+      selected: <SeasonNumber>{seasonNumber},
+      onSelectionChanged: (Set<SeasonNumber> selected) {
+        SeasonNumber temp;
+        (selected.isNotEmpty)
+            ? temp = selected.first
+            : temp = SeasonNumber.empty;
+        ref.watch(seasonProvider.notifier).changeSeasonNumber(temp);
+        ref.watch(episodeProvider.notifier).changeEpisodeList(temp);
+      },
+    );
+  }
+}
+
+class EpisodeListTiles extends ConsumerStatefulWidget {
+  const EpisodeListTiles({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EpisodeListTilesState();
+}
+
+class _EpisodeListTilesState extends ConsumerState<EpisodeListTiles> {
+  @override
+  Widget build(BuildContext context) {
+    List<EpisodeNumber> list = ref.watch(episodeProvider);
+    return Expanded(
+      child: ListView(
+        children: [
+          for (var i in list)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text(i.name),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }
 

@@ -30,8 +30,8 @@ Stream<int> stream() async* {
 
 void main() async {
   List<int> l = List.generate(100, (index) => index);
-  // temp().then((value) => print("temp val returned: $value"));
-  // print("temp val instance: ${temp()}");
+  temp().then((value) => print("temp val returned: $value"));
+  print("temp val instance: ${temp()}");
 
   var x = getList(l);
   x.then(
@@ -45,11 +45,11 @@ void main() async {
 
   print(x);
 
-  // var s = stream();
-  // await for (int val in s) {
-  //   print(val);
-  // }
-  // int number = await divider();
-  // print(List<int>.from(
-  //     l.where((element) => element % number == 0 ? true : false)));
+  var s = stream();
+  await for (int val in s) {
+    print(val);
+  }
+  int number = await divider();
+  print(List<int>.from(
+      l.where((element) => element % number == 0 ? true : false)));
 }

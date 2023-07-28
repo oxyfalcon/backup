@@ -32,3 +32,22 @@ final characterProvider =
 
 final locationProvider =
     StateProvider<LocationItems>((ref) => LocationItems.empty());
+
+class EpisodeNotifier extends Notifier<List<EpisodeNumber>> {
+  @override
+  List<EpisodeNumber> build() => [];
+
+  void changeEpisodeList(SeasonNumber season) => state = seasonEpisode[season]!;
+}
+
+final episodeProvider = NotifierProvider<EpisodeNotifier, List<EpisodeNumber>>(
+    () => EpisodeNotifier());
+
+class SeasonNotifier extends StateNotifier<SeasonNumber> {
+  SeasonNotifier() : super(SeasonNumber.empty);
+
+  void changeSeasonNumber(SeasonNumber s) => state = s;
+}
+
+final seasonProvider = StateNotifierProvider<SeasonNotifier, SeasonNumber>(
+    (ref) => SeasonNotifier());
