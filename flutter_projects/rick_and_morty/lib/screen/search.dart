@@ -166,7 +166,17 @@ class _SearchState extends ConsumerState<Search> {
                           border: OutlineInputBorder()),
                     ),
                   ),
-                  const SeasonSelectionButton(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SeasonSelectionButton(),
+                      TextButton(
+                          onPressed: () => ref
+                              .read(selectedEpisodeProvider.notifier)
+                              .removeAll(),
+                          child: const Text("Clear"))
+                    ],
+                  ),
                   const EpisodeListTiles()
                 ]),
               )),
@@ -247,13 +257,31 @@ class _EpisodeListTilesState extends ConsumerState<EpisodeListTiles> {
   @override
   Widget build(BuildContext context) {
     List<EpisodeNumber> list = ref.watch(episodeProvider);
+    var currentSeasonNumber = ref.watch(seasonProvider);
+    var selectedEpisode = ref.watch(selectedEpisodeProvider);
+    var selectedEpisodeState = ref.watch(selectedEpisodeProvider.notifier);
     return Expanded(
       child: ListView(
         children: [
           for (var i in list)
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListTile(
+              child: CheckboxListTile.adaptive(
+                selected: selectedEpisode[currentSeasonNumber]!.contains(i),
+                value: selectedEpisode[currentSeasonNumber]!.contains(i),
+                selectedTileColor: Theme.of(context)
+                    .copyWith(
+                        colorScheme:
+                            ColorScheme.fromSeed(seedColor: Colors.greenAccent))
+                    .colorScheme
+                    .inversePrimary,
+                onChanged: (value) {
+                  setState(() {
+                    (value!)
+                        ? selectedEpisodeState.addEpisode(i)
+                        : selectedEpisodeState.removeEpisode(i);
+                  });
+                },
                 title: Text(i.name),
               ),
             ),
@@ -362,4 +390,13 @@ class _SpeciesButtonState extends ConsumerState<SpeciesButton> {
       },
     );
   }
+}
+
+class ClearAllTextButton extends ConsumerWidget {
+  const ClearAllTextButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) => TextButton(
+      onPressed: () => ref.read(selectedEpisodeProvider.notifier).removeAll(),
+      child: const Text("Clear"));
 }

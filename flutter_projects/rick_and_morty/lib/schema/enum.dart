@@ -58,21 +58,18 @@ enum SeasonNumber { empty, S01, S02, S03, S04, S05 }
 List<SeasonNumber> s = SeasonNumber.values;
 
 enum EpisodeNumber {
-  empty(),
-  E01(),
-  E02(),
-  E03(),
-  E04(),
-  E05(),
-  E06(),
-  E07(),
-  E08(),
-  E09(),
-  E10(),
-  E11();
-
-  const EpisodeNumber({this.isCompleted = false});
-  final bool isCompleted;
+  empty,
+  E01,
+  E02,
+  E03,
+  E04,
+  E05,
+  E06,
+  E07,
+  E08,
+  E09,
+  E10,
+  E11;
 }
 
 final seasonString = <SeasonNumber, String>{
@@ -82,21 +79,6 @@ final seasonString = <SeasonNumber, String>{
   SeasonNumber.S03: "S03",
   SeasonNumber.S04: "S04",
   SeasonNumber.S05: "S05"
-};
-
-final episodeString = <EpisodeNumber, String>{
-  EpisodeNumber.empty: "",
-  EpisodeNumber.E01: "E01",
-  EpisodeNumber.E02: "E02",
-  EpisodeNumber.E03: "E03",
-  EpisodeNumber.E04: "E04",
-  EpisodeNumber.E05: "E05",
-  EpisodeNumber.E06: "E06",
-  EpisodeNumber.E07: "E07",
-  EpisodeNumber.E08: "E08",
-  EpisodeNumber.E09: "E09",
-  EpisodeNumber.E10: "E10",
-  EpisodeNumber.E11: "E11"
 };
 
 List<EpisodeNumber> episodeList = [
@@ -112,8 +94,8 @@ List<EpisodeNumber> episodeList = [
   EpisodeNumber.E10,
 ];
 
-final seasonEpisode = <SeasonNumber, List<EpisodeNumber>>{
-  SeasonNumber.empty: [EpisodeNumber.empty],
+var seasonEpisode = <SeasonNumber, List<EpisodeNumber>>{
+  SeasonNumber.empty: [],
   SeasonNumber.S01: [...episodeList, EpisodeNumber.E11],
   SeasonNumber.S02: episodeList,
   SeasonNumber.S03: episodeList,
@@ -121,12 +103,14 @@ final seasonEpisode = <SeasonNumber, List<EpisodeNumber>>{
   SeasonNumber.S05: episodeList,
 };
 
-class SelectedEpisode {
-  EpisodeNumber episodeNumber;
-  bool isSelected;
-
-  SelectedEpisode({required this.episodeNumber, this.isSelected = false});
-}
+Map<SeasonNumber, List<EpisodeNumber>> selectedEpisode = {
+  SeasonNumber.empty: [],
+  SeasonNumber.S01: [],
+  SeasonNumber.S02: [],
+  SeasonNumber.S03: [],
+  SeasonNumber.S04: [],
+  SeasonNumber.S05: []
+};
 
 class EpisodeItems {
   SeasonNumber season;

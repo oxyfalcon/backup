@@ -36,7 +36,6 @@ final locationProvider =
 class EpisodeNotifier extends Notifier<List<EpisodeNumber>> {
   @override
   List<EpisodeNumber> build() => [];
-
   void changeEpisodeList(SeasonNumber season) => state = seasonEpisode[season]!;
 }
 
@@ -51,3 +50,30 @@ class SeasonNotifier extends StateNotifier<SeasonNumber> {
 
 final seasonProvider = StateNotifierProvider<SeasonNotifier, SeasonNumber>(
     (ref) => SeasonNotifier());
+
+class SelectedEpisodeNotifier
+    extends AutoDisposeNotifier<Map<SeasonNumber, List<EpisodeNumber>>> {
+  @override
+  Map<SeasonNumber, List<EpisodeNumber>> build() => selectedEpisode;
+
+  void addEpisode(EpisodeNumber e) {
+    SeasonNumber s = ref.watch(seasonProvider);
+    state[s]!.add(e);
+  }
+
+  void removeEpisode(EpisodeNumber e) {
+    SeasonNumber s = ref.watch(seasonProvider);
+    state[s]!.remove(e);
+  }
+
+  void removeAll() {
+    state.updateAll((key, value) => List<EpisodeNumber>.empty(growable: true));
+    Map<SeasonNumber, List<EpisodeNumber>> newMap =
+        Map<SeasonNumber, List<EpisodeNumber>>.from(state);
+    state = newMap;
+  }
+}
+
+final selectedEpisodeProvider = AutoDisposeNotifierProvider<
+    SelectedEpisodeNotifier,
+    Map<SeasonNumber, List<EpisodeNumber>>>(() => SelectedEpisodeNotifier());
