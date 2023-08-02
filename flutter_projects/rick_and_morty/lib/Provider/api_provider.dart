@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:app/Provider/local_provider.dart';
 import 'package:app/schema/character_schema.dart';
@@ -13,6 +14,7 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   String filter = "";
   String page = "page=";
   int length = 0;
+  Timer _timer = Timer(const Duration(milliseconds: 0), () {});
 
   @override
   Future<List<dynamic>> build() {
@@ -51,12 +53,6 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
     return list;
   }
 
-  void getPage(int? index) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(
-        () => getResponseList("$_baseUrl$str?$page$index&$filter"));
-  }
-
   void characterFilter() {
     CharacterItems characterSearchItems = ref.watch(characterProvider);
     String characterName = characterSearchItems.name;
@@ -82,15 +78,26 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   }
 
   void getSearchItems(String r) async {
+    ref.watch(valueProvider.notifier).index = 1;
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => getResponseList("$_baseUrl$str?$r"));
   }
 
-  void homePage() async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() {
-      return getResponseList("$_baseUrl$str");
-    });
+  Future<void> getNextPage() async {
+    if (_timer.isActive) {
+      return;
+    }
+    _timer = Timer(const Duration(milliseconds: 1000), () {});
+    int pageNumber = ref.watch(valueProvider.notifier).index;
+    if (pageNumber <= length) {
+      pageNumber++;
+      print(
+          "index = $pageNumber, length: $length, \n url: $_baseUrl$str?$page$pageNumber&$filter");
+      final nextItems =
+          await getResponseList("$_baseUrl$str?$page$pageNumber&$filter");
+      state = AsyncValue.data(state.value!..addAll(nextItems));
+      ref.watch(valueProvider.notifier).index = pageNumber;
+    }
   }
 }
 

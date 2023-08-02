@@ -20,120 +20,88 @@ class ItemList extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: [
-              HomeButton(),
               Search(),
-              Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: MoreDisplayMenu(),
-              ),
             ],
           ),
         ),
-        const Expanded(child: DisplayList()),
+        Expanded(child: DisplayList()),
       ],
     );
   }
 }
 
-class MoreDisplayMenu extends ConsumerStatefulWidget {
-  const MoreDisplayMenu({super.key});
+class DisplayList extends ConsumerWidget {
+  DisplayList({super.key});
+  final ScrollController scrollController = ScrollController();
 
   @override
-  ConsumerState<MoreDisplayMenu> createState() => _MoreDisplayMenuState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    scrollController.addListener(() {
+      final maxScroll = scrollController.position.maxScrollExtent;
+      final currentScroll = scrollController.position.pixels;
+      final delta = MediaQuery.of(context).size.width * 0.20;
+      if (maxScroll - currentScroll <= delta) {
+        ref.watch(apiProvider.notifier).getNextPage();
+      }
+    });
+    final getList = ref.watch(apiProvider);
+    final value = ref.watch(valueProvider);
 
-class _MoreDisplayMenuState extends ConsumerState<MoreDisplayMenu> {
-  int? selectedValue = 1;
-  @override
-  Widget build(BuildContext context) {
-    ref.watch(apiProvider);
-    List<int> list = List.generate(
-        ref.read(apiProvider.notifier).length, (index) => index + 1);
-
-    return DropdownButton<int>(
-      alignment: AlignmentDirectional.centerEnd,
-      icon: const Icon(Icons.arrow_downward),
-      items: list
-          .map((int value) => DropdownMenuItem<int>(
-                value: value,
-                child: Text(
-                  "$value",
-                  textAlign: TextAlign.right,
-                ),
-              ))
-          .toList(),
-      onChanged: (int? value) {
-        ref.watch(apiProvider.notifier).getPage(value);
-        selectedValue = value;
-        ref.watch(valueProvider.notifier).index = value;
-      },
-      value: ref.watch(valueProvider.notifier).index,
+    return CustomScrollView(
+      controller: scrollController,
+      slivers: [
+        getList.when(
+            data: (list) {
+              if (list.isEmpty) {
+                return SliverToBoxAdapter(
+                    child: Center(
+                  child: Text("No results",
+                      style: Theme.of(context).textTheme.labelLarge),
+                ));
+              } else {
+                return CurrentWidget(
+                  value: value,
+                  list: list,
+                );
+              }
+            },
+            error: (error, stackTrace) => Text(error.toString()),
+            loading: () => const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                ))
+      ],
     );
   }
 }
 
-class DisplayList extends ConsumerWidget {
-  const DisplayList({super.key});
+class CurrentWidget extends StatelessWidget {
+  const CurrentWidget({super.key, required this.value, required this.list});
 
+  final int value;
+  final List<dynamic> list;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final value = ref.read(valueProvider);
-    final getList = ref.watch(apiProvider);
-    return getList.when(
-        data: (list) {
-          if (list.isNotEmpty) {
-            return ListView(
-              children: [
-                for (var itr in list)
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Card(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      child: ListTile(
-                        onTap: () {
-                          switch (value) {
-                            case 0:
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CharacterDisplayPage(itr: itr)));
-                              break;
-                          }
-                        },
-                        title: Text(itr.name),
-                        subtitle:
-                            Text(DateFormat.yMMMMEEEEd().format(itr.created)),
-                        leading: (value == 0) ? Image.network(itr.image) : null,
-                      ),
-                    ),
-                  ),
-              ],
-            );
-          } else {
-            return Center(
-              child: FittedBox(
-                  child: Text("No results",
-                      style: Theme.of(context).textTheme.labelLarge)),
-            );
-          }
-        },
-        error: (error, stackTrace) => Text(error.toString()),
-        loading: () => Container(
-            alignment: Alignment.center,
-            child: const CircularProgressIndicator()));
-  }
-}
-
-class HomeButton extends ConsumerWidget {
-  const HomeButton({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return IconButton(
-        onPressed: () {
-          ref.watch(apiProvider.notifier).homePage();
-        },
-        icon: const Icon(Icons.home));
+  Widget build(BuildContext context) {
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+      childCount: list.length,
+      (context, index) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+            child: ListTile(
+          onTap: () {
+            switch (value) {
+              case 0:
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        CharacterDisplayPage(itr: list[index])));
+                break;
+            }
+          },
+          title: Text(list[index].name),
+          subtitle: Text(DateFormat.yMMMMEEEEd().format(list[index].created)),
+          leading: (value == 0) ? Image.network(list[index].image) : null,
+        )),
+      ),
+    ));
   }
 }
