@@ -51,6 +51,9 @@ class DisplayList extends ConsumerWidget {
       controller: scrollController,
       slivers: [
         getList.when(
+            onGoingError: (items, e, stk) =>
+                CurrentWidget(value: value, list: items),
+            onGoingLoading: (items) => CurrentWidget(value: value, list: items),
             data: (list) {
               if (list.isEmpty) {
                 return SliverToBoxAdapter(
@@ -68,7 +71,8 @@ class DisplayList extends ConsumerWidget {
             error: (error, stackTrace) => Text(error.toString()),
             loading: () => const SliverToBoxAdapter(
                   child: Center(child: CircularProgressIndicator()),
-                ))
+                )),
+        OnGoingWidget()
       ],
     );
   }
@@ -81,27 +85,53 @@ class CurrentWidget extends StatelessWidget {
   final List<dynamic> list;
   @override
   Widget build(BuildContext context) {
+    print("CurrentBuild");
     return SliverList(
         delegate: SliverChildBuilderDelegate(
-      childCount: list.length,
-      (context, index) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-            child: ListTile(
-          onTap: () {
-            switch (value) {
-              case 0:
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        CharacterDisplayPage(itr: list[index])));
-                break;
-            }
-          },
-          title: Text(list[index].name),
-          subtitle: Text(DateFormat.yMMMMEEEEd().format(list[index].created)),
-          leading: (value == 0) ? Image.network(list[index].image) : null,
-        )),
+            childCount: list.length,
+            (context, index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                      child: ListTile(
+                    onTap: () {
+                      switch (value) {
+                        case 0:
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  CharacterDisplayPage(itr: list[index])));
+                          break;
+                      }
+                    },
+                    title: Text(list[index].name),
+                    subtitle: Text(
+                        DateFormat.yMMMMEEEEd().format(list[index].created)),
+                    leading:
+                        (value == 0) ? Image.network(list[index].image) : null,
+                  )),
+                )));
+  }
+}
+
+class OnGoingWidget extends ConsumerWidget {
+  const OnGoingWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final list = ref.read(apiProvider);
+    return SliverToBoxAdapter(
+      child: list.maybeWhen(
+        orElse: () => const SizedBox.shrink(),
+        onGoingLoading: (items) {
+          if (!ref.read(apiProvider.notifier).finished) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return const Center(
+              child: Text("All Done"),
+            );
+          }
+        },
+        onGoingError: (items, e, stk) => Center(child: Text(e.toString())),
       ),
-    ));
+    );
   }
 }

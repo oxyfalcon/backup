@@ -26,7 +26,7 @@ class MyHomePage extends ConsumerStatefulWidget {
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var selectedIndexState = ref.watch(valueProvider.notifier);
+    var valueNotifierState = ref.watch(valueProvider.notifier);
     var index = ref.watch(valueProvider);
 
     return Scaffold(
@@ -44,7 +44,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       drawer: NavigationDrawer(
         onDestinationSelected: (value) {
-          selectedIndexState.change(value);
+          valueNotifierState.change(value);
           Navigator.of(context).pop();
         },
         selectedIndex: index,

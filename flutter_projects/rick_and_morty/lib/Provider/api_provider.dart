@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:app/Provider/local_provider.dart';
+import 'package:app/Provider/pagination_state.dart';
 import 'package:app/schema/character_schema.dart';
 import 'package:app/schema/enum.dart';
 import 'package:app/schema/location_scheme.dart';
@@ -8,18 +9,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/schema/episode_schema.dart';
 
-class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
+class Api extends AutoDisposeNotifier<PaginationState> {
   final String _baseUrl = "https://rickandmortyapi.com/api";
   String str = "";
   String filter = "";
   String page = "page=";
   int length = 0;
   Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  List<dynamic> _items = [];
+  bool finished = false;
 
   @override
-  Future<List<dynamic>> build() {
+  PaginationState build() {
+    finished = false;
+    name();
+    return PaginationState.loading();
+  }
+
+  void name() async {
     str = ref.read(valueProvider.notifier).str();
-    return getResponseList("$_baseUrl$str");
+    _items = await getResponseList("$_baseUrl$str");
+    state = PaginationState.data(_items);
   }
 
   Future<List<dynamic>> getResponseList(String r) async {
@@ -78,27 +88,33 @@ class Api extends AutoDisposeAsyncNotifier<List<dynamic>> {
   }
 
   void getSearchItems(String r) async {
+    finished = false;
     ref.watch(valueProvider.notifier).index = 1;
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() => getResponseList("$_baseUrl$str?$r"));
+    state = const PaginationState.loading();
+    _items = await getResponseList("$_baseUrl$str?$r");
+    state = PaginationState.data(_items);
   }
 
   Future<void> getNextPage() async {
-    if (_timer.isActive) {
+    if (_timer.isActive && _items.isNotEmpty) {
       return;
     }
     _timer = Timer(const Duration(milliseconds: 1000), () {});
+    state = PaginationState.onGoingLoading(_items);
     int pageNumber = ref.watch(valueProvider.notifier).index;
     if (pageNumber <= length) {
+      if (pageNumber == length) {
+        finished = true;
+        return;
+      }
       pageNumber++;
-      print(
-          "index = $pageNumber, length: $length, \n url: $_baseUrl$str?$page$pageNumber&$filter");
       final nextItems =
           await getResponseList("$_baseUrl$str?$page$pageNumber&$filter");
-      state = AsyncValue.data(state.value!..addAll(nextItems));
       ref.watch(valueProvider.notifier).index = pageNumber;
+      state = PaginationState.data(_items..addAll(nextItems));
     }
   }
 }
 
-final apiProvider = AsyncNotifierProvider.autoDispose<Api, List>(() => Api());
+final apiProvider =
+    NotifierProvider.autoDispose<Api, PaginationState>(() => Api());
