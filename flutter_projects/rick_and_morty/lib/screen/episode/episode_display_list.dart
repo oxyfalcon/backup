@@ -72,6 +72,12 @@ class CurrentEpisodeWidget extends StatelessWidget {
                             title: Text(list[index1].name),
                             subtitle: Text(DateFormat.yMMMMEEEEd()
                                 .format(list[index1].created)),
+                            children: [
+                              for (int i = 0;
+                                  i < list[index1].characters.length;
+                                  i++)
+                                Text(list[index1].characters[i])
+                            ],
                           ),
                         ],
                       )),

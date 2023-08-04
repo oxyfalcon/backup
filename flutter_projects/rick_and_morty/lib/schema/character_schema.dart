@@ -1,8 +1,3 @@
-import 'package:app/schema/enum.dart';
-import 'package:app/schema/episode_schema.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 class Character {
   Character({
     required this.id,
@@ -31,20 +26,6 @@ class Character {
   final List<String> episode;
   final String url;
   final DateTime created;
-
-  List<Episode> allEpisodePresentInCharacter = <Episode>[];
-  Map<SeasonNumber, List<EpisodeNumber>> mapOfSeasonEpisode = {};
-
-  void episodeMapping() async {
-    List<Future<http.Response>> responseList = [];
-    for (var i in episode) {
-      responseList.add(http.get(Uri.parse(i)));
-    }
-    var x1 = await Future.wait(responseList.where((element) => true));
-    for (var i in x1) {
-      allEpisodePresentInCharacter.add(await jsonDecode(i.body)['results']);
-    }
-  }
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
         id: json["id"],

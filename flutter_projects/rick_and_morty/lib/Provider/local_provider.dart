@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:app/schema/enum.dart';
 import 'package:app/screen/character/character_display_list.dart';
 import 'package:app/screen/character/character_search.dart';
@@ -7,6 +8,9 @@ import 'package:app/screen/location/location_display_list.dart';
 import 'package:app/screen/location/location_search.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app/schema/character_schema.dart';
+import 'package:app/schema/location_schema.dart';
+import 'package:http/http.dart' as http;
 
 class ValueNotifier extends StateNotifier<int> {
   ValueNotifier() : super(0);
@@ -115,3 +119,31 @@ final selectedEpisodeProvider = AutoDisposeNotifierProvider<
 final selectingDisplayProvider =
     NotifierProvider<SelectingDisplayNotifier, Widget>(
         () => SelectingDisplayNotifier());
+
+class AllCharacterFromLocationNotifier
+    extends AutoDisposeAsyncNotifier<List<Character>> {
+  @override
+  List<Character> build() => [];
+
+  void allCharactersInLocation(Location currentLocation) async {
+    state = const AsyncValue.loading();
+    if (currentLocation.allCharacterPresentInLocation.isNotEmpty) {
+      state = AsyncValue.data(currentLocation.allCharacterPresentInLocation);
+      return;
+    }
+    state = await AsyncValue.guard(() async {
+      List<String> residents = currentLocation.residents;
+      var temp = await Future.wait(residents.map((e) async {
+        final response = await http.get(Uri.parse(e));
+        return jsonDecode(response.body);
+      }).toList());
+      var x = temp.map((e) => Character.fromJson(e)).toList();
+      currentLocation.allCharacterPresentInLocation = x;
+      return x;
+    });
+  }
+}
+
+final allCharacterFromLocationProvider = AutoDisposeAsyncNotifierProvider<
+    AllCharacterFromLocationNotifier,
+    List<Character>>(() => AllCharacterFromLocationNotifier());

@@ -19,6 +19,15 @@ class Location {
   final String url;
   final DateTime created;
 
+  factory Location.empty() => Location(
+      id: 0,
+      name: "",
+      type: "",
+      dimension: "",
+      residents: [],
+      url: "",
+      created: DateTime.now());
+
   List<Character> allCharacterPresentInLocation = <Character>[];
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],

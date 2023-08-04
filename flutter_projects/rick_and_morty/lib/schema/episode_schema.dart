@@ -1,5 +1,3 @@
-import 'package:app/schema/character_schema.dart';
-
 class Episode {
   Episode({
     required this.id,
@@ -19,7 +17,6 @@ class Episode {
   final String url;
   final DateTime created;
 
-  List<Character> allCharacterPresentInEpisode = <Character>[];
   factory Episode.fromJson(Map<String, dynamic> json) => Episode(
         id: json["id"],
         name: json["name"],
