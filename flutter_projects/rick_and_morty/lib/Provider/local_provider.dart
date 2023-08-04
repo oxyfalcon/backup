@@ -1,4 +1,11 @@
 import 'package:app/schema/enum.dart';
+import 'package:app/screen/character/character_display_list.dart';
+import 'package:app/screen/character/character_search.dart';
+import 'package:app/screen/episode/episode_display_list.dart';
+import 'package:app/screen/episode/episode_search.dart';
+import 'package:app/screen/location/location_display_list.dart';
+import 'package:app/screen/location/location_search.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ValueNotifier extends StateNotifier<int> {
@@ -7,20 +14,6 @@ class ValueNotifier extends StateNotifier<int> {
   void change(int value) {
     index = 1;
     state = value;
-  }
-
-  String str() {
-    switch (state) {
-      case 0:
-        return '/character';
-      case 1:
-        return '/location';
-      case 2:
-        return '/episode';
-
-      default:
-        throw ("Error in str()");
-    }
   }
 }
 
@@ -74,6 +67,51 @@ class SelectedEpisodeNotifier
   }
 }
 
+class SelectingDisplayNotifier extends Notifier<Widget> {
+  @override
+  Widget build() {
+    var val = ref.watch(valueProvider);
+    switch (val) {
+      case 0:
+        return DisplayCharacter();
+      case 1:
+        return DisplayLocation();
+      case 2:
+        return DisplayEpisode();
+
+      default:
+        throw ('Error in selectionPageNotifier');
+    }
+  }
+}
+
+class SelectingSearchNotifier extends AutoDisposeNotifier<Widget> {
+  @override
+  Widget build() {
+    var val = ref.watch(valueProvider);
+    switch (val) {
+      case 0:
+        return const SearchCharacter();
+
+      case 1:
+        return const SearchLocation();
+
+      case 2:
+        return const SearchEpisode();
+      default:
+        throw ('Error in SelectingSearchNotifier');
+    }
+  }
+}
+
+final selectingSearchProvider =
+    AutoDisposeNotifierProvider<SelectingSearchNotifier, Widget>(
+        () => SelectingSearchNotifier());
+
 final selectedEpisodeProvider = AutoDisposeNotifierProvider<
     SelectedEpisodeNotifier,
     Map<SeasonNumber, List<EpisodeNumber>>>(() => SelectedEpisodeNotifier());
+
+final selectingDisplayProvider =
+    NotifierProvider<SelectingDisplayNotifier, Widget>(
+        () => SelectingDisplayNotifier());

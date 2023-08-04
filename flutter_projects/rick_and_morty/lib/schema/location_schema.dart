@@ -1,3 +1,5 @@
+import 'package:app/schema/character_schema.dart';
+
 class Location {
   Location({
     required this.id,
@@ -17,6 +19,7 @@ class Location {
   final String url;
   final DateTime created;
 
+  List<Character> allCharacterPresentInLocation = <Character>[];
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         id: json["id"],
         name: json["name"],
