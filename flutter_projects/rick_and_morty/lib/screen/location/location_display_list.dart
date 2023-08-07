@@ -74,15 +74,14 @@ class CurrentLocationWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Consumer(builder: (context, ref, value) {
-                      final _controller = ExpansionTileController();
+                      print("rebuilding");
                       var results = ref.watch(allCharacterFromLocationProvider);
                       return ExpansionTile(
-                        controller: _controller,
                         title: Text(listLocation[indexLocation].name),
                         subtitle: Text(DateFormat.yMMMMEEEEd()
                             .format(listLocation[indexLocation].created)),
                         onExpansionChanged: (value) {
-                          (value && _controller.isExpanded)
+                          (value)
                               ? ref
                                   .watch(
                                       allCharacterFromLocationProvider.notifier)
