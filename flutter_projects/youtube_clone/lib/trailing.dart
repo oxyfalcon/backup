@@ -22,7 +22,12 @@ class Trailing extends StatelessWidget {
                     size: 15,
                   ),
                 ),
-                Text("30 mins"),
+                Text(
+                  "30 mins",
+                  style: TextStyle(
+                    fontFamily: "Arial1",
+                  ),
+                ),
               ],
             ),
           ),
@@ -39,7 +44,12 @@ class Trailing extends StatelessWidget {
                       size: 15,
                     ),
                   ),
-                  Text("Ashlynn Dias"),
+                  Text(
+                    "Ashlynn Dias",
+                    style: TextStyle(
+                      fontFamily: "Arial1",
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -55,7 +65,10 @@ class Trailing extends StatelessWidget {
         child: Text(
           "Resume Consultation",
           style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400),
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              fontFamily: "Arial1"),
         ),
       ),
     );

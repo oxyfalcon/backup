@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone/bottom_tab_bar.dart';
 import 'package:youtube_clone/leading.dart';
 import 'package:youtube_clone/revenue_widget.dart';
 import 'package:youtube_clone/trailing.dart';
@@ -27,10 +28,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomOptions(),
+      bottomNavigationBar: const BottomTabBar(),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        title: const Text("Dashboard"),
+        title: const Text(
+          "Dashboard",
+          style: TextStyle(
+              fontFamily: "Arial1", color: Color.fromRGBO(70, 70, 70, 1)),
+        ),
         centerTitle: true,
       ),
       backgroundColor: const Color.fromRGBO(250, 250, 250, 1),
@@ -45,8 +50,11 @@ class MyHomePage extends StatelessWidget {
                   children: [
                     Text(
                       'Starts in 5 minutes',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "Arial1",
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(50, 50, 50, 1)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 5),
@@ -78,9 +86,12 @@ class MyHomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                       Text(
-                        "Paid By Revenue",
+                        "Revenue",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                            fontSize: 20,
+                            fontFamily: "Arial1",
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(50, 50, 50, 1)),
                       ),
                     ]))),
             Padding(
@@ -90,53 +101,6 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class BottomOptions extends StatefulWidget {
-  const BottomOptions({super.key});
-
-  @override
-  State<BottomOptions> createState() => BottomOptionsState();
-}
-
-class BottomOptionsState extends State<BottomOptions> {
-  int currentIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: NavigationBar(
-          indicatorShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          elevation: 0,
-          selectedIndex: currentIndex,
-          onDestinationSelected: (value) {
-            setState(() {
-              currentIndex = value;
-            });
-          },
-          destinations: const <NavigationDestination>[
-            NavigationDestination(
-              icon: Icon(Icons.home_filled),
-              label: "",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.person_4_rounded),
-              label: "",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.videocam),
-              label: "",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.calendar_month),
-              label: "",
-            ),
-            NavigationDestination(icon: Icon(Icons.menu), label: "")
-          ]),
     );
   }
 }

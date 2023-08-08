@@ -52,11 +52,35 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  uses-material-design: true
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins/Poppins-Regular.ttf
+    
+    - family: Helvetica
+      fonts: 
+      - asset: fonts/Helvetica-Font/Helvetica.ttf
+
+    - family: Arial1
+      fonts: 
+      - asset: fonts/Arial-Font/arial_1.ttf
+
+    - family: Arial2
+      fonts: 
+      - asset: fonts/Arial-Font/arial_2.ttf
+
+    - family: Arial3
+      fonts: 
+      - asset: fonts/Arial-Font/arial_bold.ttf
+  
+    - family: free_sans
+      fonts: 
+      - asset: fonts/free_sans/FreeSans.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

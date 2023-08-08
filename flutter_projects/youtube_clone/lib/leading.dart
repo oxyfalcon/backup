@@ -17,19 +17,26 @@ class Leading extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: EdgeInsets.only(top: 15.0),
                   child: Text(
-                    "09:55",
+                    "09:45",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Color.fromRGBO(229, 234, 255, 1),
+                      fontFamily: "Arial1",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
+                  padding: EdgeInsets.only(bottom: 11.0),
                   child: Text(
                     "Join",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        color: Color.fromRGBO(229, 234, 255, 1),
+                        fontFamily: "Arial1",
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
               ]),

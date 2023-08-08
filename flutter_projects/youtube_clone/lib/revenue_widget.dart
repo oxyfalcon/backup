@@ -23,7 +23,11 @@ class RevenueWidget extends StatelessWidget {
                 padding: EdgeInsets.only(top: 8.0, left: 8.0),
                 child: Text(
                   "PAID TO YOU",
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 9,
+                      fontFamily: "Arial1",
+                      color: Color.fromRGBO(50, 50, 50, 1),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               IntrinsicHeight(
@@ -39,21 +43,28 @@ class RevenueWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   "THIS MONTH",
-                                  style: TextStyle(fontSize: 10),
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Color.fromRGBO(137, 137, 137, 1),
+                                      fontFamily: "Arial1",
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   "\$15,000",
                                   style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
                                 FittedBox(
                                   child: Text(
-                                    "\$13k LAST MONTH",
+                                    "\$13K LAST MONTH",
                                     style: TextStyle(
                                         color: Color.fromRGBO(17, 210, 150, 1),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
+                                        fontWeight: FontWeight.w800,
+                                        fontFamily: 'Arial1',
+                                        fontSize: 9),
                                   ),
                                 )
                               ],
@@ -69,12 +80,19 @@ class RevenueWidget extends StatelessWidget {
                           child: Column(children: [
                             Text(
                               "THIS YEAR",
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Color.fromRGBO(137, 137, 137, 1),
+                                  fontFamily: "Arial1",
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "\$72,000",
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                           ]),
                         ),
@@ -88,7 +106,11 @@ class RevenueWidget extends StatelessWidget {
                 padding: EdgeInsets.only(top: 25.0, left: 8.0, bottom: 10),
                 child: Text(
                   "OUTSTANDING PAYMENT",
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 9,
+                      fontFamily: "Arial1",
+                      color: Color.fromRGBO(50, 50, 50, 1),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               IntrinsicHeight(
@@ -103,22 +125,34 @@ class RevenueWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   "PENDING AMOUNT",
-                                  style: TextStyle(fontSize: 10),
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Color.fromRGBO(137, 137, 137, 1),
+                                      fontFamily: "Arial1",
+                                      fontWeight: FontWeight.w900),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "\$6,000",
-                                      style: TextStyle(
+                                FittedBox(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "\$6,000",
+                                        style: TextStyle(
                                           fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Icon(
-                                      Icons.info_outline,
-                                      size: 20,
-                                    )
-                                  ],
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 5.0),
+                                        child: Icon(
+                                          Icons.info_outline,
+                                          size: 18,
+                                          color:
+                                              Color.fromRGBO(190, 190, 190, 1),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -133,20 +167,43 @@ class RevenueWidget extends StatelessWidget {
                           child: Column(children: [
                             Text(
                               "UNPAID INVOICES",
-                              style: TextStyle(fontSize: 10),
-                            ),
-                            Text(
-                              "\$8,000",
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
+                                  fontSize: 10,
+                                  color: Color.fromRGBO(137, 137, 137, 1),
+                                  fontFamily: "Arial1",
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            FittedBox(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "\$8,000",
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5.0),
+                                    child: Icon(
+                                      Icons.info_outline,
+                                      size: 18,
+                                      color: Color.fromRGBO(190, 190, 190, 1),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             FittedBox(
                               child: Text(
-                                "\$3k OVERDUE",
+                                "\$3K OVERDUE",
                                 style: TextStyle(
+                                    fontFamily: "Arial1",
                                     color: Color.fromRGBO(215, 45, 43, 1),
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w800),
                               ),
                             )
                           ]),
