@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:collection';
 
 enum ColorTheme {
   greyBackGround,
@@ -31,3 +32,27 @@ const Map<ColorTheme, Color> colorMap = <ColorTheme, Color>{
   ColorTheme.pieChartOrange: Color.fromRGBO(255, 190, 0, 1),
   ColorTheme.pieChartPink: Color.fromRGBO(253, 132, 131, 1)
 };
+
+Map<Map<int, String>, Color> sortMapByInnerMapKeys(
+    Map<Map<int, String>, Color> temp) {
+  var sortedKeys = SplayTreeMap<Map<int, String>, Color>(
+    (a, b) {
+      var aInnerKey = a.keys.first;
+      var bInnerKey = b.keys.first;
+      return bInnerKey.compareTo(aInnerKey);
+    },
+  );
+
+  sortedKeys.addAll(temp);
+  return sortedKeys;
+}
+
+Map<Map<int, String>, Color> _valueToChart = {
+  {30: "InterViewPrep"}: colorMap[ColorTheme.pieChartOrange]!,
+  {35: "Resume Edit"}: colorMap[ColorTheme.bluePrimary]!,
+  {20: "OnGoing Education..."}: colorMap[ColorTheme.pieChartPink]!,
+  {15: "Other Services"}: colorMap[ColorTheme.tabBarNotSelected]!,
+};
+
+Map<Map<int, String>, Color> valueToChart =
+    sortMapByInnerMapKeys(_valueToChart);

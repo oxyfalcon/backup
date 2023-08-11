@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone/all_colors.dart';
 import 'package:youtube_clone/bottom_tab_bar.dart';
-import 'package:youtube_clone/leading.dart';
-import 'package:youtube_clone/revenue_widget.dart';
-import 'package:youtube_clone/trailing.dart';
+import 'package:youtube_clone/custom_listtile/leading.dart';
+import 'package:youtube_clone/revenue_widget/revenue_widget.dart';
+import 'package:youtube_clone/custom_listtile/trailing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +32,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const BottomTabBar(),
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         backgroundColor: colorMap[ColorTheme.whiteBackground],
         title: Text(
           "Dashboard",
@@ -68,13 +69,14 @@ class MyHomePage extends StatelessWidget {
                               const BorderRadius.all(Radius.circular(10)),
                           side: BorderSide(
                               color: colorMap[ColorTheme.bluePrimary]!)),
-                      child: const Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(flex: 1, child: Leading()),
-                          Expanded(flex: 4, child: Trailing())
-                        ],
-                      ),
+                      child: LayoutBuilder(
+                          builder: (context, constraints) => const Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(flex: 1, child: Leading()),
+                                  Expanded(flex: 4, child: Trailing())
+                                ],
+                              )),
                     ),
                   ),
                 ],
