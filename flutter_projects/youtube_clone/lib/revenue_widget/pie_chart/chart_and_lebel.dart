@@ -43,43 +43,43 @@ class ChartAndLebel extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
-                          Expanded(
-                              child: ListTile(
-                                  trailing: (i.key.entries.first.key == 15)
-                                      ? const Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 12,
-                                        )
-                                      : null,
-                                  title: (i.key.entries.first.key == 15)
-                                      ? FittedBox(
-                                          child: Text(
-                                            i.key.entries.first.value,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: "Arial1",
-                                                fontWeight: FontWeight.w600,
-                                                color: colorMap[ColorTheme
-                                                    .cardSecondaryText]),
-                                          ),
-                                        )
-                                      : Text(
-                                          i.key.entries.first.value,
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: "Arial1",
-                                              fontWeight: FontWeight.w600,
-                                              color: colorMap[ColorTheme
-                                                  .cardSecondaryText]),
-                                        )))
+                          Flexible(
+                            child: Wrap(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Text(
+                                    i.key.entries.first.value,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: "Arial1",
+                                        fontWeight: FontWeight.w600,
+                                        color: colorMap[
+                                            ColorTheme.cardSecondaryText]),
+                                  ),
+                                ),
+                                if (i.key.entries.first.key == 15)
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 15,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                       if (i.key.entries.first.key != 15)
-                        CustomDottedLine(
-                            lineThickness: 0.5,
-                            dashLength: 2,
-                            dashGapLength: 2,
-                            color: colorMap[ColorTheme.listTileShadow]!)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomDottedLine(
+                              lineThickness: 0.5,
+                              dashLength: 2,
+                              dashGapLength: 2,
+                              color: colorMap[ColorTheme.listTileShadow]!),
+                        )
                     ],
                   ),
               ],

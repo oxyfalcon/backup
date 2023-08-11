@@ -41,13 +41,10 @@ class DonutPainter extends CustomPainter {
 
     double length = 0.0;
     (size.width <= size.height) ? length = size.width : length = size.height;
-    print(
-        "size.width: ${size.width}, size.height: ${size.height}, length: $length");
     final c = Offset(
       size.width / 2.0,
       size.height / 2.0,
     );
-    print("c: $c");
     drawingArc(
         c: c,
         length: length,
@@ -97,7 +94,6 @@ class DonutPainter extends CustomPainter {
       required Canvas canvas,
       required int totalSum}) {
     double startAngle2 = 3 * pi / 2;
-    print(length);
     final linePaint = Paint()
       ..color = colorMap[ColorTheme.whiteBackground]!
       ..style = PaintingStyle.stroke
@@ -108,7 +104,6 @@ class DonutPainter extends CustomPainter {
       final dx = length / 2 * cos(startAngle2);
       final dy = length / 2 * sin(startAngle2);
       final p2 = c + Offset(dx, dy);
-      print(Offset(dx, dy));
       canvas.drawLine(c, p2, linePaint);
       startAngle2 += sweepAngle;
     }
