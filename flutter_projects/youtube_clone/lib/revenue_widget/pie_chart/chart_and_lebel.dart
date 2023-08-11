@@ -44,18 +44,21 @@ class ChartAndLebel extends StatelessWidget {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Flexible(
-                            child: Wrap(
+                            child: Flex(
+                              direction: Axis.horizontal,
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.only(left: 10.0),
-                                  child: Text(
-                                    i.key.entries.first.value,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: "Arial1",
-                                        fontWeight: FontWeight.w600,
-                                        color: colorMap[
-                                            ColorTheme.cardSecondaryText]),
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      i.key.entries.first.value,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Arial1",
+                                          fontWeight: FontWeight.w600,
+                                          color: colorMap[
+                                              ColorTheme.cardSecondaryText]),
+                                    ),
                                   ),
                                 ),
                                 if (i.key.entries.first.key == 15)
@@ -63,7 +66,7 @@ class ChartAndLebel extends StatelessWidget {
                                     padding: EdgeInsets.only(left: 10.0),
                                     child: Icon(
                                       Icons.arrow_forward_ios,
-                                      size: 15,
+                                      size: 14,
                                     ),
                                   ),
                               ],
