@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone/all_colors.dart';
 
 class BottomTabBar extends StatefulWidget {
   const BottomTabBar({super.key});
@@ -25,17 +26,17 @@ class BottomOptionsState extends State<BottomTabBar> {
                 child: TabBar(
                   dividerHeight: 0,
                   dividerColor: null,
-                  indicator: const UnderlineTabIndicator(
-                    insets: EdgeInsets.only(bottom: 53),
+                  indicator: UnderlineTabIndicator(
+                    insets: const EdgeInsets.only(bottom: 53),
                     borderSide: BorderSide(
-                        color: Color.fromRGBO(1, 48, 225, 1), width: 5),
-                    borderRadius: BorderRadius.only(
+                        color: colorMap[ColorTheme.bluePrimary]!, width: 5),
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
                   ),
-                  indicatorColor: const Color.fromRGBO(1, 48, 225, 1),
-                  labelColor: const Color.fromRGBO(1, 48, 225, 1),
-                  unselectedLabelColor: const Color.fromRGBO(182, 182, 182, 1),
+                  indicatorColor: colorMap[ColorTheme.bluePrimary],
+                  labelColor: colorMap[ColorTheme.bluePrimary],
+                  unselectedLabelColor: colorMap[ColorTheme.tabBarNotSelected],
                   tabAlignment: TabAlignment.fill,
                   onTap: (value) {
                     setState(() {
@@ -46,7 +47,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 0)
                           ? BoxDecoration(
-                              color: const Color.fromRGBO(229, 234, 255, 1),
+                              color: colorMap[ColorTheme.blueSecondary],
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -61,7 +62,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 1)
                           ? BoxDecoration(
-                              color: const Color.fromRGBO(229, 234, 255, 1),
+                              color: colorMap[ColorTheme.blueSecondary],
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -75,7 +76,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: const Color.fromRGBO(1, 48, 225, 1),
+                          color: colorMap[ColorTheme.bluePrimary],
                           borderRadius: BorderRadius.circular(15)),
                       child: const SizedBox(
                           child: Padding(
@@ -90,7 +91,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 3)
                           ? BoxDecoration(
-                              color: const Color.fromRGBO(229, 234, 255, 1),
+                              color: colorMap[ColorTheme.blueSecondary],
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -105,7 +106,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 4)
                           ? BoxDecoration(
-                              color: const Color.fromRGBO(229, 234, 255, 1),
+                              color: colorMap[ColorTheme.blueSecondary],
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(

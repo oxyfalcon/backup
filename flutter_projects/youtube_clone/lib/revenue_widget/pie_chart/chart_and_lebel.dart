@@ -76,7 +76,7 @@ class ChartAndLebel extends StatelessWidget {
                       ),
                       if (i.key.entries.first.key != 15)
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
                           child: CustomDottedLine(
                               lineThickness: 0.5,
                               dashLength: 2,

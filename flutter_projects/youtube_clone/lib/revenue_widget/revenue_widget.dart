@@ -22,40 +22,40 @@ class RevenueWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 8.0),
               child: Text(
                 "PAID TO YOU",
                 style: TextStyle(
                     fontSize: 9,
                     fontFamily: "Arial1",
-                    color: Color.fromRGBO(50, 50, 50, 1),
+                    color: colorMap[ColorTheme.cardPrimaryText]!,
                     fontWeight: FontWeight.bold),
               ),
             ),
             const PaidToYou(),
             const Divider(),
-            const Padding(
-              padding: EdgeInsets.only(top: 25.0, left: 8.0, bottom: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0, left: 8.0, bottom: 10),
               child: Text(
                 "OUTSTANDING PAYMENT",
                 style: TextStyle(
                     fontSize: 9,
                     fontFamily: "Arial1",
-                    color: Color.fromRGBO(50, 50, 50, 1),
+                    color: colorMap[ColorTheme.cardPrimaryText],
                     fontWeight: FontWeight.bold),
               ),
             ),
             const OutstandingPayment(),
             const Divider(),
-            const Padding(
-              padding: EdgeInsets.only(top: 25.0, left: 8.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 25.0, left: 8.0),
               child: Text(
                 "LIFETIME SERVICES BREAKDOWN",
                 style: TextStyle(
                     fontSize: 9,
                     fontFamily: "Arial1",
-                    color: Color.fromRGBO(50, 50, 50, 1),
+                    color: colorMap[ColorTheme.cardPrimaryText],
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -64,21 +64,34 @@ class RevenueWidget extends StatelessWidget {
               thickness: 0.3,
             ),
             FilledButton(
-              statesController: MaterialStatesController(),
-              style: ButtonStyle(
-                shape: CustomShape(),
-              ),
+              style:
+                  ButtonStyle(shape: CustomShape(), padding: CustomPadding()),
               onPressed: () {},
-              child: const Text("Create Invoice"),
+              child: const Text(
+                "Create Invoice",
+                style: TextStyle(
+                    fontFamily: 'Arial1',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15),
+              ),
             ),
-            FilledButton(
-                style: ButtonStyle(
-                    backgroundColor: WhiteButtonColor(), shape: CustomShape2()),
-                onPressed: () {},
-                child: const Text(
-                  "View all invoices",
-                  style: TextStyle(color: Colors.black),
-                ))
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: FilledButton(
+                  style: ButtonStyle(
+                      backgroundColor: WhiteButtonColor(),
+                      shape: CustomShape2(),
+                      padding: CustomPadding()),
+                  onPressed: () {},
+                  child: const Text(
+                    "View all invoices",
+                    style: TextStyle(
+                        fontFamily: 'Arial1',
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15),
+                  )),
+            )
           ]),
         ),
       ),
@@ -90,9 +103,9 @@ class CustomShape extends RoundedRectangleBorder
     implements MaterialStateOutlinedBorder {
   @override
   OutlinedBorder? resolve(Set<MaterialState> states) {
-    return const RoundedRectangleBorder(
-        side: BorderSide(color: Color.fromRGBO(240, 240, 240, 1)),
-        borderRadius: BorderRadius.all(Radius.circular(8)));
+    return RoundedRectangleBorder(
+        side: BorderSide(color: colorMap[ColorTheme.filledButtonBorderColor]!),
+        borderRadius: const BorderRadius.all(Radius.circular(10)));
   }
 }
 
@@ -100,15 +113,20 @@ class CustomShape2 extends RoundedRectangleBorder
     implements MaterialStateOutlinedBorder {
   @override
   OutlinedBorder? resolve(Set<MaterialState> states) {
-    return const RoundedRectangleBorder(
-        side: BorderSide(color: Color.fromRGBO(240, 240, 240, 1)),
-        borderRadius: BorderRadius.all(Radius.circular(8)));
+    return RoundedRectangleBorder(
+        side: BorderSide(color: colorMap[ColorTheme.filledButtonBorderColor]!),
+        borderRadius: const BorderRadius.all(Radius.circular(10)));
   }
 }
 
 class WhiteButtonColor extends MaterialStateProperty<Color> {
   @override
-  Color resolve(Set<MaterialState> states) {
-    return colorMap[ColorTheme.whiteBackground]!;
-  }
+  Color resolve(Set<MaterialState> states) =>
+      colorMap[ColorTheme.whiteBackground]!;
+}
+
+class CustomPadding extends MaterialStateProperty<EdgeInsetsGeometry> {
+  @override
+  EdgeInsetsGeometry resolve(Set<MaterialState> states) =>
+      const EdgeInsets.all(12);
 }

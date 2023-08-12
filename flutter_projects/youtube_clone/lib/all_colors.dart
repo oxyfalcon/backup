@@ -15,6 +15,7 @@ enum ColorTheme {
   listTileShadow,
   pieChartOrange,
   pieChartPink,
+  filledButtonBorderColor
 }
 
 const Map<ColorTheme, Color> colorMap = <ColorTheme, Color>{
@@ -30,7 +31,8 @@ const Map<ColorTheme, Color> colorMap = <ColorTheme, Color>{
   ColorTheme.globalMainText: Color.fromRGBO(33, 33, 33, 1),
   ColorTheme.listTileShadow: Color.fromRGBO(217, 222, 247, 1),
   ColorTheme.pieChartOrange: Color.fromRGBO(255, 190, 0, 1),
-  ColorTheme.pieChartPink: Color.fromRGBO(253, 132, 131, 1)
+  ColorTheme.pieChartPink: Color.fromRGBO(253, 132, 131, 1),
+  ColorTheme.filledButtonBorderColor: Color.fromRGBO(240, 240, 240, 1)
 };
 
 Map<Map<int, String>, Color> sortMapByInnerMapKeys(
