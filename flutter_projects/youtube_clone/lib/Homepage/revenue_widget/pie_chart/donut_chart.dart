@@ -82,7 +82,7 @@ class DonutPainter extends CustomPainter {
   void drawingMidCircle(
       {required Canvas canvas, required Offset c, required double length}) {
     final whiteCirclePaint = Paint()
-      ..color = colorMap[ColorTheme.whiteBackground]!
+      ..color = ColorMap.whiteBackground
       ..style = PaintingStyle.fill;
     canvas.drawCircle(c, length * 0.37, whiteCirclePaint);
   }
@@ -95,7 +95,7 @@ class DonutPainter extends CustomPainter {
       required int totalSum}) {
     double startAngle2 = 3 * pi / 2;
     final linePaint = Paint()
-      ..color = colorMap[ColorTheme.whiteBackground]!
+      ..color = ColorMap.whiteBackground
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4;
 

@@ -26,17 +26,17 @@ class BottomOptionsState extends State<BottomTabBar> {
                 child: TabBar(
                   dividerHeight: 0,
                   dividerColor: null,
-                  indicator: UnderlineTabIndicator(
-                    insets: const EdgeInsets.only(bottom: 53),
-                    borderSide: BorderSide(
-                        color: colorMap[ColorTheme.bluePrimary]!, width: 5),
-                    borderRadius: const BorderRadius.only(
+                  indicator: const UnderlineTabIndicator(
+                    insets: EdgeInsets.only(bottom: 53),
+                    borderSide:
+                        BorderSide(color: ColorMap.bluePrimary, width: 5),
+                    borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
                   ),
-                  indicatorColor: colorMap[ColorTheme.bluePrimary],
-                  labelColor: colorMap[ColorTheme.bluePrimary],
-                  unselectedLabelColor: colorMap[ColorTheme.tabBarNotSelected],
+                  indicatorColor: ColorMap.bluePrimary,
+                  labelColor: ColorMap.bluePrimary,
+                  unselectedLabelColor: ColorMap.tabBarNotSelected,
                   tabAlignment: TabAlignment.fill,
                   onTap: (value) {
                     setState(() {
@@ -47,7 +47,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 0)
                           ? BoxDecoration(
-                              color: colorMap[ColorTheme.blueSecondary],
+                              color: ColorMap.blueSecondary,
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -62,7 +62,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 1)
                           ? BoxDecoration(
-                              color: colorMap[ColorTheme.blueSecondary],
+                              color: ColorMap.blueSecondary,
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -76,7 +76,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: colorMap[ColorTheme.bluePrimary],
+                          color: ColorMap.bluePrimary,
                           borderRadius: BorderRadius.circular(15)),
                       child: const SizedBox(
                           child: Padding(
@@ -91,7 +91,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 3)
                           ? BoxDecoration(
-                              color: colorMap[ColorTheme.blueSecondary],
+                              color: ColorMap.blueSecondary,
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(
@@ -106,7 +106,7 @@ class BottomOptionsState extends State<BottomTabBar> {
                     Container(
                       decoration: (currentIndex == 4)
                           ? BoxDecoration(
-                              color: colorMap[ColorTheme.blueSecondary],
+                              color: ColorMap.blueSecondary,
                               borderRadius: BorderRadius.circular(10))
                           : null,
                       child: const SizedBox(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone/all_colors.dart';
-import 'package:youtube_clone/revenue_widget/pie_chart/donut_chart.dart';
+import 'package:youtube_clone/Homepage/revenue_widget/pie_chart/donut_chart.dart';
 
 class ChartAndLebel extends StatelessWidget {
   const ChartAndLebel({
@@ -52,12 +52,11 @@ class ChartAndLebel extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Text(
                                       i.key.entries.first.value,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: "Arial1",
                                           fontWeight: FontWeight.w600,
-                                          color: colorMap[
-                                              ColorTheme.cardSecondaryText]),
+                                          color: ColorMap.cardSecondaryText),
                                     ),
                                   ),
                                 ),
@@ -75,13 +74,13 @@ class ChartAndLebel extends StatelessWidget {
                         ],
                       ),
                       if (i.key.entries.first.key != 15)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
                           child: CustomDottedLine(
                               lineThickness: 0.5,
                               dashLength: 2,
                               dashGapLength: 2,
-                              color: colorMap[ColorTheme.listTileShadow]!),
+                              color: ColorMap.listTileShadow),
                         )
                     ],
                   ),

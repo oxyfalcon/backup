@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone/Homepage/Client/client_widget.dart';
 import 'package:youtube_clone/all_colors.dart';
 import 'package:youtube_clone/bottom_tab_bar.dart';
-import 'package:youtube_clone/custom_listtile/leading.dart';
-import 'package:youtube_clone/revenue_widget/revenue_widget.dart';
-import 'package:youtube_clone/custom_listtile/trailing.dart';
+import 'package:youtube_clone/Homepage/custom_listtile/leading.dart';
+import 'package:youtube_clone/Homepage/revenue_widget/revenue_widget.dart';
+import 'package:youtube_clone/Homepage/custom_listtile/trailing.dart';
+import 'package:youtube_clone/card_title.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorSchemeSeed: colorMap[ColorTheme.bluePrimary],
+        colorSchemeSeed: ColorMap.bluePrimary,
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -33,20 +35,20 @@ class MyHomePage extends StatelessWidget {
       bottomNavigationBar: const BottomTabBar(),
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: colorMap[ColorTheme.whiteBackground],
-        title: Text(
+        backgroundColor: ColorMap.whiteBackground,
+        title: const Text(
           "Dashboard",
-          style: TextStyle(
-              fontFamily: "Arial1", color: colorMap[ColorTheme.globalMainText]),
+          style:
+              TextStyle(fontFamily: "Arial1", color: ColorMap.globalMainText),
         ),
         centerTitle: true,
       ),
-      backgroundColor: colorMap[ColorTheme.greyBackGround],
+      backgroundColor: ColorMap.greyBackGround,
       body: SafeArea(
         child: ListView(
-          children: <Widget>[
+          children: const <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,50 +58,39 @@ class MyHomePage extends StatelessWidget {
                         fontSize: 20,
                         fontFamily: "Arial1",
                         fontWeight: FontWeight.w500,
-                        color: colorMap[ColorTheme.globalMainText]),
+                        color: ColorMap.globalMainText),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 5),
+                    padding: EdgeInsets.only(top: 5),
                     child: Card(
-                      shadowColor: colorMap[ColorTheme.listTileShadow],
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      elevation: 1,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          side: BorderSide(
-                              color: colorMap[ColorTheme.bluePrimary]!)),
-                      child: LayoutBuilder(
-                          builder: (context, constraints) => const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(flex: 1, child: Leading()),
-                                  Expanded(flex: 4, child: Trailing())
-                                ],
-                              )),
-                    ),
+                        shadowColor: ColorMap.listTileShadow,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            side: BorderSide(color: ColorMap.bluePrimary)),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(flex: 1, child: Leading()),
+                            Expanded(flex: 4, child: Trailing())
+                          ],
+                        )),
                   ),
                 ],
               ),
             ),
+            CardTitle(
+              text: "Revenue",
+            ),
             Padding(
-                padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-                child: SizedBox(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Text(
-                        "Revenue",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontFamily: "Arial1",
-                            fontWeight: FontWeight.w500,
-                            color: colorMap[ColorTheme.globalMainText]),
-                      ),
-                    ]))),
-            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: RevenueWidget(),
+            ),
+            CardTitle(text: "Clients"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ClientWidget(),
             )
           ],
         ),
