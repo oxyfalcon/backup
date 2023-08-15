@@ -1,0 +1,4 @@
+#Sat Aug 12 02:13:55 IST 2023
+base.0=/Users/akashsingh/Documents/backup/flutter_projects/youtube_clone/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
