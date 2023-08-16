@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/Homepage/revenue_widget/revenue_card_elements.dart';
+import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
 
 class ClientTotalRow extends StatelessWidget {
   const ClientTotalRow({
@@ -15,6 +15,7 @@ class ClientTotalRow extends StatelessWidget {
               child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SecondaryTitleWithinCard(text: "CLIENT COUNT"),
                 FittedBox(
@@ -29,21 +30,23 @@ class ClientTotalRow extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              child: Column(children: [
-                FittedBox(
-                  child: SecondaryTitleWithinCard(
-                    text: "AVR SESSIONS / CLIENT",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                FittedBox(
-                  child: Row(
-                    children: [
-                      NumberDisplay(text: "3"),
-                    ],
-                  ),
-                ),
-              ]),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      child: SecondaryTitleWithinCard(
+                        text: "AVR SESSIONS / CLIENT",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    FittedBox(
+                      child: Row(
+                        children: [
+                          NumberDisplay(text: "3"),
+                        ],
+                      ),
+                    ),
+                  ]),
             ),
           ),
         ],

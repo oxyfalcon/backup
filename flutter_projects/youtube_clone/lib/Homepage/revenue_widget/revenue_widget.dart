@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/Homepage/revenue_widget/revenue_card_elements.dart';
+import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/pie_chart/chart_and_lebel.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/outstanding_payment.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/paid_to_you.dart';
@@ -13,7 +13,6 @@ class RevenueWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Card(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 0,
         color: ColorMap.whiteBackground,
         shape: const RoundedRectangleBorder(
@@ -35,7 +34,7 @@ class RevenueWidget extends StatelessWidget {
             const OutstandingPayment(),
             const Divider(),
             const PrimaryTitleWithinCard(
-              text: "LIFETIME SERVICES PAYMENT",
+              text: "LIFETIME SERVICES BREAKDOWN",
             ),
             const ChartAndLebel(),
             const Divider(
@@ -51,7 +50,7 @@ class RevenueWidget extends StatelessWidget {
               child: CustomFilledButton(
                 buttonStyle: ButtonStyle(
                     backgroundColor: WhiteButtonColor(),
-                    shape: CustomShape2(),
+                    shape: CustomShape(),
                     padding: CustomPadding()),
                 text: "View All Invoices",
                 color: Colors.black,

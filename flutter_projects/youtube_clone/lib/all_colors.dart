@@ -28,9 +28,10 @@ Map<Map<int, String>, Color> valueToChart =
 abstract class ColorMap extends Color {
   static final ColorMap _obj = ColorMap();
   factory ColorMap() => _obj;
+  static const Color listTileSecondartText = Color.fromRGBO(140, 140, 140, 1);
   static const Color cardSecondaryText = Color.fromRGBO(137, 137, 137, 1);
   static const Color greyBackGround = Color.fromRGBO(250, 250, 250, 1);
-  static const Color whiteBackground = Color.fromRGBO(255, 255, 255, 1);
+  static const Color whiteBackground = Colors.white;
   static const Color cardPrimaryText = Color.fromRGBO(50, 50, 50, 1);
   static const Color cardRed = Color.fromRGBO(215, 45, 43, 1);
   static const Color cardGreen = Color.fromRGBO(17, 210, 150, 1);
@@ -43,32 +44,34 @@ abstract class ColorMap extends Color {
   static const Color pieChartPink = Color.fromRGBO(253, 132, 131, 1);
   static const Color filledButtonBorderColor = Color.fromRGBO(240, 240, 240, 1);
   static const Color iconSecondaryColor = Color.fromRGBO(190, 190, 190, 1);
+  static const Color clientName = Color.fromRGBO(102, 102, 102, 1);
+  static const Color clientSession = Color.fromRGBO(75, 75, 75, 1);
 }
 
 List<Map<String, dynamic>> clientList = [
   {
     "Name": "Alan Cooper",
-    "Image_url": Image.asset('image/person1.jpeg'),
+    "Image_url": 'image/person1.jpeg',
     "Sessions": 30,
   },
   {
     "Name": "Andri Sator",
-    "Image_url": Image.asset("image/person2.jpeg"),
+    "Image_url": "image/person2.jpeg",
     "Sessions": 29,
   },
   {
     "Name": "Makers",
-    "Image_Url": Image.asset('image/person3.jpeg'),
+    "Image_url": 'image/person3.jpeg',
     "Sessions": 28,
   },
   {
-    "Name": "Makers",
-    "Image_Url": Image.asset('image/person4.jpeg'),
+    "Name": "Maker",
+    "Image_url": 'image/person4.jpeg',
     "Sessions": 27,
   },
   {
     "Name": "Andrew Carlos",
-    "Image_Url": Image.asset('image/person5.jpeg'),
+    "Image_url": 'image/person5.jpeg',
     "Sessions": 26,
   }
 ];

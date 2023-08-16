@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:youtube_clone/Homepage/Client/client_widget.dart';
 import 'package:youtube_clone/all_colors.dart';
 import 'package:youtube_clone/bottom_tab_bar.dart';
-import 'package:youtube_clone/Homepage/custom_listtile/leading.dart';
+import 'package:youtube_clone/Homepage/custom_listTile/leading.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/revenue_widget.dart';
-import 'package:youtube_clone/Homepage/custom_listtile/trailing.dart';
+import 'package:youtube_clone/Homepage/custom_listTile/trailing.dart';
 import 'package:youtube_clone/card_title.dart';
 
 void main() {
@@ -46,13 +46,14 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: ColorMap.greyBackGround,
       body: SafeArea(
         child: ListView(
-          children: const <Widget>[
+          shrinkWrap: true,
+          children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Starts in 5 minutes',
                     style: TextStyle(
                         fontSize: 20,
@@ -61,34 +62,52 @@ class MyHomePage extends StatelessWidget {
                         color: ColorMap.globalMainText),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Card(
-                        shadowColor: ColorMap.listTileShadow,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        elevation: 1,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                        surfaceTintColor: Colors.white,
+                        color: ColorMap.whiteBackground,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
                             side: BorderSide(color: ColorMap.bluePrimary)),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(flex: 1, child: Leading()),
-                            Expanded(flex: 4, child: Trailing())
-                          ],
+                        child: IntrinsicHeight(
+                          child: Row(
+                            children: [
+                              const Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(0.0),
+                                    child: Leading(),
+                                  )),
+                              const Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: Trailing(),
+                                  )),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 15,
+                                  color: ColorMap.bluePrimary,
+                                ),
+                              ),
+                            ],
+                          ),
                         )),
                   ),
                 ],
               ),
             ),
-            CardTitle(
+            const CardTitle(
               text: "Revenue",
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: RevenueWidget(),
             ),
-            CardTitle(text: "Clients"),
-            Padding(
+            const CardTitle(text: "Clients"),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: ClientWidget(),
             )

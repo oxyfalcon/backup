@@ -15,7 +15,7 @@ class ChartAndLebel extends StatelessWidget {
           Expanded(
               flex: 3,
               child: Container(
-                constraints: BoxConstraints.tight(const Size.fromHeight(200)),
+                constraints: BoxConstraints.loose(const Size.fromHeight(150)),
                 child: const FractionallySizedBox(
                   widthFactor: 0.8,
                   heightFactor: 0.8,
@@ -44,10 +44,10 @@ class ChartAndLebel extends StatelessWidget {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Flexible(
-                            child: Flex(
-                              direction: Axis.horizontal,
+                            child: Row(
                               children: [
                                 Flexible(
+                                  flex: 3,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Text(
@@ -61,11 +61,16 @@ class ChartAndLebel extends StatelessWidget {
                                   ),
                                 ),
                                 if (i.key.entries.first.key == 15)
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      size: 14,
+                                  Flexible(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 14)),
                                     ),
                                   ),
                               ],

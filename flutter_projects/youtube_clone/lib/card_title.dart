@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/Homepage/revenue_widget/revenue_card_elements.dart';
+import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
 import 'package:youtube_clone/all_colors.dart';
 
 class CardTitle extends StatelessWidget with CustomText {

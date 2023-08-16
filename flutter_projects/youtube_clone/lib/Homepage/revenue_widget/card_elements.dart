@@ -166,15 +166,6 @@ class CustomShape extends RoundedRectangleBorder
           borderRadius: BorderRadius.all(Radius.circular(10)));
 }
 
-class CustomShape2 extends RoundedRectangleBorder
-    implements MaterialStateOutlinedBorder {
-  @override
-  OutlinedBorder? resolve(Set<MaterialState> states) =>
-      const RoundedRectangleBorder(
-          side: BorderSide(color: ColorMap.filledButtonBorderColor),
-          borderRadius: BorderRadius.all(Radius.circular(10)));
-}
-
 class WhiteButtonColor extends MaterialStateProperty<Color> {
   @override
   Color resolve(Set<MaterialState> states) => ColorMap.whiteBackground;
