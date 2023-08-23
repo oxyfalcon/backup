@@ -10,14 +10,8 @@ class ClientListHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 20.0, left: 8.0),
-            child: SecondaryTitleWithinCard(text: "TOP 5 CLIENTS"),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20.0, left: 8.0),
-            child: SecondaryTitleWithinCard(text: "SESSIONS"),
-          ),
+          SecondaryTitleWithinCard(text: "TOP 5 CLIENTS"),
+          SecondaryTitleWithinCard(text: "SESSIONS"),
         ],
       ),
     );

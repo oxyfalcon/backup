@@ -105,7 +105,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.18.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.17.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -266,6 +266,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "package_config",
       "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/package_config-2.1.0",
       "packageUri": "lib/",
@@ -284,6 +290,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "provider",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/provider-6.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "pub_semver",
       "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
       "packageUri": "lib/",
@@ -294,6 +306,12 @@
       "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "riverpod",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/riverpod-2.3.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "shelf",
@@ -314,6 +332,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "smooth_page_indicator",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/smooth_page_indicator-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_gen",
       "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/source_gen-1.4.0",
       "packageUri": "lib/",
@@ -327,15 +351,21 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
-      "name": "stream_channel",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
+      "name": "state_notifier",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/state_notifier-1.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "stream_channel",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "stream_transform",
@@ -357,9 +387,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.6.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.6.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.18"
     },
     {
       "name": "timing",
@@ -407,10 +437,10 @@
       "name": "youtube_clone",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-08-14T12:04:46.397766Z",
+  "generated": "2023-08-21T10:42:46.586582Z",
   "generator": "pub",
-  "generatorVersion": "3.2.0-42.0.dev"
+  "generatorVersion": "3.1.0-262.3.beta"
 }

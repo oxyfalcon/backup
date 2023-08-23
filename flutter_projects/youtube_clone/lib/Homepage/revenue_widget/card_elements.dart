@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone/all_colors.dart';
 
-class CustomFilledButton extends StatelessWidget with CustomText {
+class CustomFilledButton extends StatelessWidget with CustomTextStyle {
   const CustomFilledButton({
     super.key,
     this.color,
@@ -26,19 +26,19 @@ class CustomFilledButton extends StatelessWidget with CustomText {
     return FilledButton(
         style: _buttonStyle,
         onPressed: (onPressed == null) ? () {} : onPressed,
-        child: super.textCustom(
-            defaultFontSize: 15,
-            inputFontSize: fontSize,
-            text: text,
-            inputColor: color,
-            defaultFontFamily: "Arial1",
-            inputFontFamily: fontfamily,
-            defaultFontWeight: FontWeight.w500,
-            inputFontWeight: fontWeight));
+        child: Text(text,
+            style: super.textCustomStyle(
+                defaultFontSize: 15,
+                inputFontSize: fontSize,
+                inputColor: color,
+                defaultFontFamily: "Arial1",
+                inputFontFamily: fontfamily,
+                defaultFontWeight: FontWeight.w500,
+                inputFontWeight: fontWeight)));
   }
 }
 
-class NumberDisplay extends StatelessWidget with CustomText {
+class NumberDisplay extends StatelessWidget with CustomTextStyle {
   const NumberDisplay({
     super.key,
     required this.text,
@@ -54,21 +54,22 @@ class NumberDisplay extends StatelessWidget with CustomText {
   final FontWeight? fontWeight;
   @override
   Widget build(BuildContext context) {
-    return super.textCustom(
-        text: text,
-        inputColor: color,
-        inputFontFamily: fontfamily,
-        inputFontSize: fontSize,
-        inputFontWeight: fontWeight,
-        defaultFontSize: 25,
-        defaultFontWeight: FontWeight.w800);
+    return Text(text,
+        style: super.textCustomStyle(
+            inputColor: color,
+            inputFontFamily: fontfamily,
+            inputFontSize: fontSize,
+            inputFontWeight: fontWeight,
+            defaultFontSize: 25,
+            defaultFontWeight: FontWeight.w800));
   }
 }
 
-class PrimaryTitleWithinCard extends StatelessWidget with CustomText {
+class PrimaryTitleWithinCard extends StatelessWidget with CustomTextStyle {
   const PrimaryTitleWithinCard({
     super.key,
-    EdgeInsets? edgeInsets,
+    EdgeInsets edgeInsets =
+        const EdgeInsets.only(top: 25.0, left: 8.0, bottom: 10),
     required this.text,
     this.color,
     this.fontfamily,
@@ -76,7 +77,7 @@ class PrimaryTitleWithinCard extends StatelessWidget with CustomText {
     this.fontWeight,
   }) : _edgeInsets = edgeInsets;
 
-  final EdgeInsets? _edgeInsets;
+  final EdgeInsets _edgeInsets;
   final String text;
   final String? fontfamily;
   final Color? color;
@@ -86,23 +87,21 @@ class PrimaryTitleWithinCard extends StatelessWidget with CustomText {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: (_edgeInsets == null)
-            ? const EdgeInsets.only(top: 25.0, left: 8.0, bottom: 10)
-            : _edgeInsets,
-        child: super.textCustom(
-            text: text,
-            defaultColor: ColorMap.cardPrimaryText,
-            inputFontFamily: fontfamily,
-            inputColor: color,
-            defaultFontFamily: "Arial1",
-            defaultFontSize: 9,
-            inputFontSize: fontSize,
-            defaultFontWeight: FontWeight.bold,
-            inputFontWeight: fontWeight));
+        padding: _edgeInsets,
+        child: Text(text,
+            style: super.textCustomStyle(
+                defaultColor: ColorMap.cardPrimaryText,
+                inputFontFamily: fontfamily,
+                inputColor: color,
+                defaultFontFamily: "Arial1",
+                defaultFontSize: 9,
+                inputFontSize: fontSize,
+                defaultFontWeight: FontWeight.bold,
+                inputFontWeight: fontWeight)));
   }
 }
 
-class SecondaryTitleWithinCard extends StatelessWidget with CustomText {
+class SecondaryTitleWithinCard extends StatelessWidget with CustomTextStyle {
   const SecondaryTitleWithinCard({
     super.key,
     required this.text,
@@ -119,23 +118,22 @@ class SecondaryTitleWithinCard extends StatelessWidget with CustomText {
 
   @override
   Widget build(BuildContext context) {
-    return super.textCustom(
-        text: text,
-        defaultColor: ColorMap.cardSecondaryText,
-        inputFontFamily: fontfamily,
-        inputColor: color,
-        defaultFontFamily: "Arial1",
-        defaultFontSize: 10,
-        inputFontSize: fontSize,
-        defaultFontWeight: FontWeight.w900,
-        inputFontWeight: fontWeight);
+    return Text(text,
+        style: super.textCustomStyle(
+            defaultColor: ColorMap.cardSecondaryText,
+            inputFontFamily: fontfamily,
+            inputColor: color,
+            defaultFontFamily: "Arial1",
+            defaultFontSize: 10,
+            inputFontSize: fontSize,
+            defaultFontWeight: FontWeight.w900,
+            inputFontWeight: fontWeight));
   }
 }
 
-mixin CustomText {
-  Text textCustom(
-      {required String text,
-      String? defaultFontFamily,
+mixin CustomTextStyle {
+  TextStyle textCustomStyle(
+      {String? defaultFontFamily,
       String? inputFontFamily,
       double? defaultFontSize,
       double? inputFontSize,
@@ -143,16 +141,13 @@ mixin CustomText {
       FontWeight? inputFontWeight,
       Color? inputColor,
       Color? defaultColor}) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: (inputColor == null) ? defaultColor : inputColor,
-        fontFamily:
-            (inputFontFamily == null) ? defaultFontFamily : inputFontFamily,
-        fontSize: (inputFontSize == null) ? defaultFontSize : inputFontSize,
-        fontWeight:
-            (inputFontWeight == null) ? defaultFontWeight : inputFontWeight,
-      ),
+    return TextStyle(
+      color: (inputColor == null) ? defaultColor : inputColor,
+      fontFamily:
+          (inputFontFamily == null) ? defaultFontFamily : inputFontFamily,
+      fontSize: (inputFontSize == null) ? defaultFontSize : inputFontSize,
+      fontWeight:
+          (inputFontWeight == null) ? defaultFontWeight : inputFontWeight,
     );
   }
 }
@@ -175,4 +170,9 @@ class CustomPadding extends MaterialStateProperty<EdgeInsetsGeometry> {
   @override
   EdgeInsetsGeometry resolve(Set<MaterialState> states) =>
       const EdgeInsets.all(12);
+}
+
+class CustomSplashColor extends MaterialStateProperty<Color> {
+  @override
+  Color resolve(Set<MaterialState> states) => ColorMap.blueSecondary;
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/Homepage/Client/client_list.dart';
-import 'package:youtube_clone/Homepage/Client/client_list_head.dart';
-import 'package:youtube_clone/Homepage/Client/client_total_row.dart';
+import 'package:youtube_clone/Homepage/client_widget/client_list.dart';
+import 'package:youtube_clone/Homepage/client_widget/client_list_head.dart';
+import 'package:youtube_clone/Homepage/client_widget/client_total_row.dart';
 import 'package:youtube_clone/all_colors.dart';
 
 class ClientWidget extends StatelessWidget {
@@ -19,13 +19,16 @@ class ClientWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ClientTotalRow(),
                 Divider(),
-                ClientListHeader(),
+                Padding(
+                  padding: EdgeInsets.only(top: 25.0, bottom: 12.0),
+                  child: ClientListHeader(),
+                ),
                 ClientList()
               ],
             )),

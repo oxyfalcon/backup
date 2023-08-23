@@ -13,48 +13,48 @@ class OutstandingPayment extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SecondaryTitleWithinCard(text: "PENDING AMOUNT"),
-                FittedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NumberDisplay(text: "\$6,000"),
-                      SizedBox.square(dimension: 31, child: InfoIcon()),
-                    ],
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  SecondaryTitleWithinCard(text: "PENDING AMOUNT"),
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NumberDisplay(text: "\$6,000"),
+                        SizedBox.square(dimension: 33, child: InfoIcon()),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           VerticalDivider(),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SecondaryTitleWithinCard(
-                      text: "UNPAID INVOICES",
-                    ),
-                    FittedBox(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          NumberDisplay(
-                            text: "\$8,000",
-                          ),
-                          SizedBox.square(dimension: 31, child: InfoIcon()),
-                        ],
+              padding: EdgeInsets.all(20.0),
+              child: Column(children: [
+                SecondaryTitleWithinCard(
+                  text: "UNPAID INVOICES",
+                ),
+                FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      NumberDisplay(
+                        text: "\$8,000",
                       ),
-                    ),
-                    FittedBox(
-                      child: SecondaryTitleWithinCard(
-                          text: "\$3K OVERDUE", color: ColorMap.cardRed),
-                    )
-                  ]),
+                      SizedBox.square(dimension: 33, child: InfoIcon()),
+                    ],
+                  ),
+                ),
+                FittedBox(
+                  child: SecondaryTitleWithinCard(
+                      text: "\$3K OVERDUE", color: ColorMap.cardRed),
+                )
+              ]),
             ),
           ),
         ],

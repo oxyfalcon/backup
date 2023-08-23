@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
 import 'package:youtube_clone/all_colors.dart';
 
-class CardTitle extends StatelessWidget with CustomText {
+class CardTitle extends StatelessWidget with CustomTextStyle {
   const CardTitle({
     super.key,
     required this.text,
@@ -19,17 +19,15 @@ class CardTitle extends StatelessWidget with CustomText {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-        child: super.textCustom(
-            text: text,
+    return Text(text,
+        style: super.textCustomStyle(
             defaultColor: ColorMap.globalMainText,
-            inputColor: color,
             inputFontFamily: fontfamily,
+            inputColor: color,
             defaultFontFamily: "Arial1",
             defaultFontSize: 20,
             inputFontSize: fontSize,
-            inputFontWeight: fontWeight,
-            defaultFontWeight: FontWeight.w500));
+            defaultFontWeight: FontWeight.w500,
+            inputFontWeight: fontWeight));
   }
 }

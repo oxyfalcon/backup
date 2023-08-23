@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.0-27.0.dev <4.0.0'
+  sdk: '>=3.1.0-262.3.beta <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,6 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   freezed_annotation: ^2.4.1
+  smooth_page_indicator: ^1.1.0
+  riverpod: ^2.3.7
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -83,11 +86,17 @@ flutter:
       - asset: fonts/free-sans/FreeSans.ttf
 
   assets:
+    - image/person1_copy.jpg
     - image/person1.jpeg
     - image/person2.jpeg  
     - image/person3.jpeg  
     - image/person4.jpeg  
     - image/person5.jpeg  
+    - images/picture1.jpg
+    - images/picture2.jpg
+    - images/picture3.jpg
+    - images/picture4.jpg
+    - images/picture5.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

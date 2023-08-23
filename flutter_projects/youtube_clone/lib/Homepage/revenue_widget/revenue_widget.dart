@@ -11,53 +11,55 @@ class RevenueWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Card(
         elevation: 0,
         color: ColorMap.whiteBackground,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            const PrimaryTitleWithinCard(
-              text: "PAID TO YOU",
-              edgeInsets: EdgeInsets.only(left: 8.0, top: 8.0),
-            ),
-            const PaidToYou(),
-            const Divider(),
-            const PrimaryTitleWithinCard(
-              text: "OUTSTANDING PAYMENTS",
-            ),
-            const OutstandingPayment(),
-            const Divider(),
-            const PrimaryTitleWithinCard(
-              text: "LIFETIME SERVICES BREAKDOWN",
-            ),
-            const ChartAndLebel(),
-            const Divider(
-              thickness: 0.3,
-            ),
-            CustomFilledButton(
-              buttonStyle:
-                  ButtonStyle(shape: CustomShape(), padding: CustomPadding()),
-              text: "Create Invoices",
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: CustomFilledButton(
-                buttonStyle: ButtonStyle(
+        child: ListView(
+            padding: const EdgeInsets.all(10),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              const PrimaryTitleWithinCard(
+                text: "PAID TO YOU",
+                edgeInsets: EdgeInsets.only(left: 8.0, top: 8.0),
+              ),
+              const PaidToYou(),
+              const Divider(),
+              const PrimaryTitleWithinCard(
+                text: "OUTSTANDING PAYMENTS",
+              ),
+              const OutstandingPayment(),
+              const Divider(),
+              const PrimaryTitleWithinCard(
+                text: "LIFETIME SERVICES BREAKDOWN",
+              ),
+              const ChartAndLebel(),
+              const Divider(
+                thickness: 0.3,
+              ),
+              CustomFilledButton(
+                buttonStyle:
+                    ButtonStyle(shape: CustomShape(), padding: CustomPadding()),
+                text: "Create Invoices",
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: CustomFilledButton(
+                  buttonStyle: ButtonStyle(
+                    overlayColor: CustomSplashColor(),
                     backgroundColor: WhiteButtonColor(),
                     shape: CustomShape(),
-                    padding: CustomPadding()),
-                text: "View All Invoices",
-                color: Colors.black,
-              ),
-            )
-          ]),
-        ),
+                    padding: CustomPadding(),
+                  ),
+                  text: "View All Invoices",
+                  color: Colors.black,
+                ),
+              )
+            ]),
       ),
     );
   }
