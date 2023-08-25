@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
+import 'package:youtube_clone/utils/card_elements.dart';
 
 class ClientListHeader extends StatelessWidget {
   const ClientListHeader({super.key});

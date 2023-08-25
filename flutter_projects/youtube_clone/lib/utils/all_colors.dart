@@ -46,6 +46,7 @@ abstract class ColorMap extends Color {
   static const Color iconSecondaryColor = Color.fromRGBO(190, 190, 190, 1);
   static const Color clientName = Color.fromRGBO(102, 102, 102, 1);
   static const Color clientSession = Color.fromRGBO(75, 75, 75, 1);
+  static const Color customOverlayColor = Color.fromARGB(255, 241, 241, 246);
 }
 
 List<Map<String, dynamic>> clientList = [

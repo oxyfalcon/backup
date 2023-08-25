@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/all_colors.dart';
+import 'package:youtube_clone/utils/all_colors.dart';
 
 class CustomFilledButton extends StatelessWidget with CustomTextStyle {
   const CustomFilledButton({
@@ -174,5 +174,5 @@ class CustomPadding extends MaterialStateProperty<EdgeInsetsGeometry> {
 
 class CustomSplashColor extends MaterialStateProperty<Color> {
   @override
-  Color resolve(Set<MaterialState> states) => ColorMap.blueSecondary;
+  Color resolve(Set<MaterialState> states) => ColorMap.customOverlayColor;
 }

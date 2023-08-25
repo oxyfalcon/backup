@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/all_colors.dart';
+import 'package:youtube_clone/utils/all_colors.dart';
 import 'package:youtube_clone/Homepage/revenue_widget/pie_chart/donut_chart.dart';
 
 class ChartAndLebel extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/all_colors.dart';
+import 'package:youtube_clone/utils/all_colors.dart';
 
 class Leading extends StatelessWidget {
   const Leading({super.key});

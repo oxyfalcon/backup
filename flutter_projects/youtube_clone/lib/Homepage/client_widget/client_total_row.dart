@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_clone/Homepage/revenue_widget/card_elements.dart';
+import 'package:youtube_clone/utils/card_elements.dart';
 
 class ClientTotalRow extends StatelessWidget {
   const ClientTotalRow({

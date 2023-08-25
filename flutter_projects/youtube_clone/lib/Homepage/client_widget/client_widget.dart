@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:youtube_clone/Homepage/client_widget/client_list.dart';
 import 'package:youtube_clone/Homepage/client_widget/client_list_head.dart';
 import 'package:youtube_clone/Homepage/client_widget/client_total_row.dart';
-import 'package:youtube_clone/all_colors.dart';
+import 'package:youtube_clone/utils/all_colors.dart';
 
 class ClientWidget extends StatelessWidget {
   const ClientWidget({super.key});

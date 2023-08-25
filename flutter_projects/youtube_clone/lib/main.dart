@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_clone/Homepage/my_home_page.dart';
-import 'package:youtube_clone/all_colors.dart';
+import 'package:youtube_clone/utils/all_colors.dart';
 import 'package:youtube_clone/bottom_tab_bar.dart';
 import 'package:youtube_clone/profile_page/profile_page.dart';
 
