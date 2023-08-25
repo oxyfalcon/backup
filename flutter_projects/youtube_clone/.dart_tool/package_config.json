@@ -3,13 +3,13 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-63.0.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/analyzer-6.1.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/analyzer-6.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -75,7 +75,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/built_value-8.6.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/built_value-8.6.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -105,7 +105,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.17.2",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -351,7 +351,7 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -363,9 +363,9 @@
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "stream_transform",
@@ -387,9 +387,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.6.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.6.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "timing",
@@ -440,7 +440,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-08-21T10:42:46.586582Z",
+  "generated": "2023-08-25T07:16:15.716243Z",
   "generator": "pub",
-  "generatorVersion": "3.1.0-262.3.beta"
+  "generatorVersion": "3.2.0-42.1.beta"
 }

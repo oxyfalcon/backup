@@ -27,7 +27,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.17.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -51,27 +51,21 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/akashsingh/Documents/Projects/flutter/packages/flutter",
+      "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/flutter_lints-2.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/akashsingh/Documents/Projects/flutter/packages/flutter_test",
+      "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.0"
-    },
-    {
-      "name": "js",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/js-0.6.7",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
     },
     {
       "name": "lints",
@@ -81,15 +75,15 @@
     },
     {
       "name": "matcher",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/matcher-0.12.15",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/matcher-0.12.16",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/material_color_utilities-0.2.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/material_color_utilities-0.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.13"
+      "languageVersion": "2.17"
     },
     {
       "name": "meta",
@@ -117,27 +111,27 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/akashsingh/Documents/Projects/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/source_span-1.9.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "string_scanner",
@@ -153,9 +147,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.5.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/test_api-0.6.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "vector_math",
@@ -164,8 +158,6 @@
       "languageVersion": "2.14"
     },
     {
-<<<<<<< HEAD:flutter_projects/app2/.dart_tool/package_config.json
-=======
       "name": "web",
       "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/web-0.1.4-beta",
       "packageUri": "lib/",
@@ -178,18 +170,13 @@
       "languageVersion": "2.19"
     },
     {
->>>>>>> d1689c3e47017e1377450d5fe2604b504e21b6ae:flutter_projects/EndGoalApp/.dart_tool/package_config.json
       "name": "app2",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     }
   ],
-<<<<<<< HEAD:flutter_projects/app2/.dart_tool/package_config.json
-  "generated": "2023-07-01T01:30:23.878441Z",
-=======
-  "generated": "2023-07-03T07:15:17.301571Z",
->>>>>>> d1689c3e47017e1377450d5fe2604b504e21b6ae:flutter_projects/EndGoalApp/.dart_tool/package_config.json
+  "generated": "2023-08-25T07:15:56.433158Z",
   "generator": "pub",
-  "generatorVersion": "3.0.5"
+  "generatorVersion": "3.2.0-42.1.beta"
 }

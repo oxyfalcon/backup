@@ -2,14 +2,13 @@
 FLUTTER_ROOT=/Users/akashsingh/Documents/Project/flutter
 FLUTTER_APPLICATION_PATH=/Users/akashsingh/Documents/backup/flutter_projects/youtube_clone
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=/Users/akashsingh/Documents/backup/flutter_projects/youtube_clone/lib/main.dart
+FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
 EXCLUDED_ARCHS[sdk=iphonesimulator*]=i386
 EXCLUDED_ARCHS[sdk=iphoneos*]=armv7
-DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz1mYWxzZQ==,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC83M2Q4OWNhN2M1YTIwY2JkZGRlNjlhYjFhNmRmZjhmZTNlY2JmZDcwLw==
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=/Users/akashsingh/Documents/backup/flutter_projects/youtube_clone/.dart_tool/package_config.json
+PACKAGE_CONFIG=.dart_tool/package_config.json
