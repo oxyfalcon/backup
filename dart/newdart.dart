@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:mirrors';
 
 base class A {
   int y;
@@ -83,6 +84,10 @@ abstract class AA {
   void method1() {
     print("class AA: method1");
   }
+
+  void method2(String input) {
+    print("Class AA: method2");
+  }
 }
 
 abstract mixin class M1 {
@@ -115,32 +120,34 @@ Function createClosure() {
 int Function(int x) wannabeFunction = B(10);
 
 void main() {
-  // B obj = B(20);
-  // obj.method1();
-  // obj(10);
+  var reflected = reflect(AA);
+  print("${reflected.getField(Symbol("Hello"))}");
+  B obj = B(20);
+  obj.method1();
+  obj(10);
 
-  // AA objBB = AA.hello();
+  AA objBB = AA.hello();
   C objc = C();
   objc.method1();
   // objc.method2();
   // objBB.method1();
 
-  // wannabeFunction(20);
-  // int funn = wannabeFunction(10);
-  // print(funn);
+  wannabeFunction(20);
+  int funn = wannabeFunction(10);
+  print(funn);
 
-  // String Function(int) test = (int x) => x.toString();
-  // // String? x = Random().nextBool() ? "not null" : null;
-  // // String Function(int)? fun = (int? n) => "$n";
+  String Function(int) test = (int x) => x.toString();
+  // String? x = Random().nextBool() ? "not null" : null;
+  // String Function(int)? fun = (int? n) => "$n";
 
-  // String Function(int)? callbacks = Random().nextBool() ? test : null;
-  // print("callback: ${callbacks?.call(10)}");
-  // // print("callbacks! : ${callbacks!(1)}");
+  String Function(int)? callbacks = Random().nextBool() ? test : null;
+  print("callback: ${callbacks?.call(10)}");
+  // print("callbacks! : ${callbacks!(1)}");
 
-  // String Function(int) f = (int x) => "$x";
-  // print(f(1)); // Prints "1".
+  String Function(int) f = (int x) => "$x";
+  print(f(1)); // Prints "1".
 
-  // var closure = createClosure();
-  // closure(); // Prints: Count: 1
-  // closure(); // Prints: Count: 2
+  var closure = createClosure();
+  closure(); // Prints: Count: 1
+  closure(); // Prints: Count: 2
 }
