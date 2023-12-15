@@ -53,7 +53,7 @@
       "name": "flutter",
       "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_lints",
@@ -65,7 +65,7 @@
       "name": "flutter_test",
       "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "lints",
@@ -87,7 +87,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/meta-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -113,7 +113,7 @@
       "name": "sky_engine",
       "rootUri": "file:///Users/akashsingh/Documents/Project/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "source_span",
@@ -159,9 +159,9 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/web-0.1.4-beta",
+      "rootUri": "file:///Users/akashsingh/.pub-cache/hosted/pub.dev/web-0.3.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "word_generator",
@@ -176,7 +176,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-08-25T07:16:05.710296Z",
+  "generated": "2023-12-14T09:36:54.419125Z",
   "generator": "pub",
-  "generatorVersion": "3.2.0-42.1.beta"
+  "generatorVersion": "3.2.3"
 }
